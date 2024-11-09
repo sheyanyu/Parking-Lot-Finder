@@ -53,7 +53,7 @@ client.connect()
         
           // Query the parking_lot collection using the location (or _id) filter
           const data = await parking_lot.find({ location_id: id }).toArray();
-          return data[0];
+          return data;
         } catch (error) {
           console.error('Error fetching data:', error);
           throw error;
@@ -95,25 +95,30 @@ client.connect()
             }
           await unvalidated.insertOne(result);
 
-          const count = 0
+          let count = 0
           const invalid = await get_awaiting_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
+          // console.log("Invalid", invalid)
           for (let i in invalid){
-              if (Number(i['price'])===Number(price)){
+            console.log("invalid obj", invalid[i])
+              if (Number(invalid[i]['price'])===Number(price)){
                   count+=1
               }
           };
     
     const valid_location = await get_valid_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
     
-    console.log(count)
+    console.log("count", count)
+    // console.log("valid", valid_location[0]["location_id"])
+    // console.log("invalid first", invalid[0]['location_id'])
     if (count>=5 ){
-        await parking_lot.updateOne(
-            { location_id: location_id },
+        const aaa = await parking_lot.updateOne(
+            { location_id: "ChIJW4qs73XS5okRwAauJFY7j1E" },
             { $set: { price: Number(price) } }
         );
-    }else if (invalid[0]['location_id']===valid_location[0]['location_id']
+        
+    }else if (invalid[0]["location_id"]===valid_location[0]["location_id"]
          && invalid[0]['price']===valid_location[0]['price']){
-           
+          console.log("reached")
         // update valid input
         await parking_lot.updateOne(
             { location_id: location_id },
