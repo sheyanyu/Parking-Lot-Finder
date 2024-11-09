@@ -54,6 +54,29 @@ function createMap(center) {
     }, 500);
   });
 
+  function calculate_distance(point1, point2){
+    const lat1 = point1.lat;
+    const lng1 = point1.lng;
+    const lat2 = point2.lat();
+    const lng2 = point2.lng();
+    
+    const R = 6371; // Radius of the earth in km
+    const dLat = deg2rad(lat2 - lat1);
+    const dLon = deg2rad(lng2 - lng1); 
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2); 
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    const d = R * c; // Distance in km
+    console.log(d);
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
   // Function to search for parking spots in the current bounds
   async function SearchParking(bounds) {
     // Clear previous parking markers
@@ -66,12 +89,19 @@ function createMap(center) {
     const request = {
       bounds: bounds,
       type: ['parking'],
-      fields: ['geometry', 'name', 'rating'],
+      fields: ['geometry', 'name', 'rating', 'place_id'],
     };
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         results.forEach((place) => {
+          if (place.geometry && place.geometry.location) {
+            distance = calculate_distance(locations[0].location, place.geometry.location);
+          } else {
+            console.log("Invalid place geometry.");
+          }
+          
+          distance = calculate_distance(locations[0].location, place.geometry.location);
           parking_list.push({
             name: place.name,
             location: {
@@ -79,6 +109,9 @@ function createMap(center) {
               lng: place.geometry.location.lng(),
             },
             rating: place.rating || "No rating available",
+            place_id: place.place_id || 'no place_id available',
+            // in km
+            distance: distance, 
           });
 
           const marker = new google.maps.Marker({
@@ -190,5 +223,3 @@ document.head.insertAdjacentHTML('beforeend', `
     }
   </style>
 `);
-
-// export { initMap };
