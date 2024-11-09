@@ -2,25 +2,7 @@ import { initMap } from '../../Back-End/map01/index.js';
 
 // Wait for the document to load fully before executing the code
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the current location and initialize the map
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     (position) => {
-    //       // Replace the map container with Google Map using initMap()
-    //       const pos = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude,
-    //       };
-    //       // Call the initMap function from index.js
-    //       window.initMapWithPosition(pos);
-    //     },
-    //     (error) => {
-    //       console.error("Error getting location:", error);
-    //     }
-    //   );
-    // } else {
-    //   console.error("Geolocation is not supported by this browser.");
-    // }
+
     initMap();
 
     // Add an event listener to update the parking list when data is ready
