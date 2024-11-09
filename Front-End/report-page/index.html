@@ -7,6 +7,14 @@
     <title>Report the Lot</title>
     <script type="module" src="report-scripts.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="../../Back-End/map01/index2.js"></script>
+    <style>
+        #map {
+            width: 90%;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,12 +23,7 @@
     </header>
     <div class = "rating-container">
         <div class="park-lot-info">
-            <img src="map-placeholder.png" alt="Parking Lot Map" class="map-image">
-            <div class = "details">
-                <div class="rating-text">I am rating...</div>
-                <div class="parking-lot-name">Parking Lot A</div>
-                <div class="address">1 E Pleasant St., MA, 01002</div>
-            </div>
+            <div id="map"></div>
         </div>
         <div class = "parking-experience">
             <p>How was your parking experience?</p>
