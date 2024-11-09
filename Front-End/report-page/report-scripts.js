@@ -69,6 +69,27 @@ submitButton.addEventListener('click', async () => {
 
 
     console.log("Form Data:", formData);
+
+    try {
+        // Send data to the backend
+        const response = await fetch("http://localhost:3000/add-item", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Success:", result);
+            alert("Item added successfully!");
+        } else {
+            console.error("Failed to submit:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
 });
 
 const back = document.querySelector(".back-button");

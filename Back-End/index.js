@@ -95,3 +95,9 @@ async function find() {
 //   price: 2,
 //   occupation: 3
 // }).catch(console.dir);
+
+// write({
+//   location: [1,1],
+//   price: 2,
+//   occupation: 3
+// }).catch(console.dir);
