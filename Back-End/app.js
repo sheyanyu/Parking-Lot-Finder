@@ -1,42 +1,69 @@
 const express = require('express');
+const { MongoClient } = require("mongodb");
+
 const app = express();
 const port = 3000;
-
-
-const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://sylvia:4xs2pp1R6EVSd8k5@parkinglotfinder.jj5d2.mongodb.net/?retryWrites=true&w=majority&appName=ParkingLotFinder";
 const client = new MongoClient(uri);
-const database = client.db('parkingdb');
-const parking_lot = database.collection('parking_lot');
-const unvalidated = database.collection('invalid');
+const cors = require('cors');
 
-// middleware to parse JSON bodies
+let database, parking_lot, unvalidated;
+
+// Middleware to parse JSON bodies
 app.use(express.json()); // for parsing application/json
+app.use(cors());
 
-// GET
-app.get('/items', (req, res) => {
-    res.json(result);
-  });
+// Connect to MongoDB
+client.connect()
+  .then(() => {
+    console.log("Connected to MongoDB");
+    database = client.db('parkingdb');
+    parking_lot = database.collection('parking_lot');
+    unvalidated = database.collection('invalid');
+  })
+  .catch(error => console.error("Error connecting to MongoDB:", error));
 
-  // Start the server
-  app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-  });
 
-// POST route to handle form data sent via AJAX
-app.post('/submit', (req, res) => {
-  const  formData = {
-    rating: ratingValue,
-    price: price,
-    occupation: occupation,
-    ticket: time
-} = req.body; // Get the data from the request body
+// POST route to handle form data
+app.post('/submit', async (req, res) => {
+  // Destructure data from the request body
+  const { rating, price, occupation, ticket, ticketTime } = req.body;
 
-  console.log('Received data:', rating, price);
+  // Log received data
+  console.log('Received data:', rating, price, occupation, ticket, ticketTime);
 
+  try {
+    // Insert the data into the parking_lot collection
+    const result = await unvalidated.insertOne({
+      rating: Number(rating),
+      price: Number(price),
+      occupation: Number(occupation),
+      ticket: ticket,
+      ticketTime: ticket === "yes" ? ticketTime : null
+    });
+
+    // Send success response
+    res.status(201).json({ message: "Data submitted successfully", insertedId: result.insertedId });
+  } catch (error) {
+    console.error("Error inserting data:", error);
+    res.status(500).json({ message: "Error submitting data" });
+  }
 });
+
+app.get('/items', async (req, res) => {
+  try {
+    const items = await parking_lot.find().toArray();
+    res.json(items);
+  } catch (error) {
+    console.error("Error retrieving items:", error);
+    res.status(500).json({ message: "Error retrieving items" });
+  }
+});
+
+
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+

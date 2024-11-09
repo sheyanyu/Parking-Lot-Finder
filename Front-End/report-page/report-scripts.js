@@ -67,13 +67,12 @@ submitButton.addEventListener('click', async () => {
         ticketTime: ticket === "yes" ? ticketTime : null
     };
 
-
     console.log("Form Data:", formData);
 
     try {
         // Send data to the backend
-        const response = await fetch("http://localhost:3000/add-item", {
-            method: "post",
+        const response = await fetch("http://localhost:3000/submit", {
+            method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
