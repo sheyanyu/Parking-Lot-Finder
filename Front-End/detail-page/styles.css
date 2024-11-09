@@ -1,1 +1,183 @@
+body {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    position: relative;
+}
 
+header {
+    width: 100%-30px;
+    max-width: 600px;
+    /* margin: 0 auto; */
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-weight: 700;
+    font-size: 2em;
+    font-family: 'Baskervville','Inter', Courier, monospace;
+    margin: 0;
+    color: #06517A;
+    cursor: pointer;
+    
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.search-bar input {
+    width: 80%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #888;
+    margin-left: -40px;
+}
+
+#map {
+    width: 100% - 30px;
+    max-width: 600px;
+    height: 200px;
+    margin: 0 15px;
+    /* padding: 20px; */
+    /* background-color: #ffffff; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 200;
+}
+
+.map img {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 20px;
+    position: relative;
+    z-index: 300;
+}
+
+.background-color{
+    width: 100%;
+    margin-top: -80px;
+    background-color: #E1EBF0;
+    position: absolute;
+    z-index: 1;
+}
+
+.parking-list {
+    width: 100% - 30px;
+    max-width: 600px;
+    max-height: 360px;
+    margin: 80px 15px;
+    /* padding: 20px; */
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* border-radius: 10px; */
+    /* margin-top: 100px; */
+    padding: 10px 0;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.parking-lot-info {
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    padding: 0 15px;
+    /* margin-bottom: 10px; */
+    /* border-radius: 10px; */
+    font-family: 'Inter', 'Courier New', Courier, monospace;
+    cursor: pointer;
+}
+
+.parking-lot-name {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #34495e;
+}
+
+.distance {
+    float: right;
+    font-size: 0.9em;
+    color: #888;
+}
+
+@media (min-width: 768px) {
+    .map {
+        /* max-width: 80%; */
+        max-width: 600px;
+    }
+}
+
+
+.parking-card {
+    width: 100% - 30px;
+    max-width: 600px;
+    max-height: 360px;
+    margin: 80px 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    /* border-radius: 10px; */
+    /* margin-top: 100px; */
+    /* padding: 10px 0; */
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    overflow-y: auto;
+    font-family: 'Baskervville','Inter', Courier, monospace;
+}
+.parking-card h1 {
+    font-size: 1.5em;
+    margin: 0;
+}
+.parking-card p {
+    margin: 10px 0;
+}
+.rating {
+    color: #ffd700;
+    font-size: 1.2em;
+}
+.distance {
+    font-size: 0.9em;
+    color: #888;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #333;
+}
+.button:hover {
+    background-color: #ddd;
+}
+.chart {
+    margin-top: 20px;
+}

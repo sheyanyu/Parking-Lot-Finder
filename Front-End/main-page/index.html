@@ -26,33 +26,56 @@
     <div class="background-color">
 
 
-      <div class="parking-list">
+      <div class="parking-list" id="parking-list">
         <!-- <div class="parking-lot-info">
             <p class="parking-lot-name">1. Parking lot A <span class="distance">&lt;34m</span></p>
             <p>Availability: 20%  Price: $25/hour, $100/Day</p>
-        </div>
-        <div class="parking-lot-info">
-            <p class="parking-lot-name">2. Parking lot B <span class="distance">&lt;100m</span></p>
-            <p>Availability: 20%  Price: $25/hour, $100/Day</p>
-        </div>
-        <div class="parking-lot-info">
-            <p class="parking-lot-name">3. Parking lot C <span class="distance">&lt;113m</span></p>
-            <p>Availability: 20%  Price: $25/hour, $100/Day</p>
-        </div>
-        <div class="parking-lot-info">
-            <p class="parking-lot-name">4. Parking lot D <span class="distance">&lt;804m</span></p>
-            <p>Availability: 20%  Price: $25/hour, $100/Day</p>
-        </div>
-        <div class="parking-lot-info">
-          <p class="parking-lot-name">5. Parking lot E <span class="distance">&lt;804m</span></p>
-          <p>Availability: 20%  Price: $25/hour, $100/Day</p>
-        </div>
-        <div class="parking-lot-info">
-          <p class="parking-lot-name">6. Parking lot F <span class="distance">&lt;804m</span></p>
-          <p>Availability: 20%  Price: $25/hour, $100/Day</p>
         </div> -->
       </div>
+      <script>
+            const parkingList = [
+            {name: 'Lot 46', location: {}, rating: 4},
+            {name: 'Lot 13', location: {}, rating: 2.3},
+            {name: 'North Pleasant St. Public Lot', location: {}, rating: 4.5},
+            {name: 'Boltwood Garage', location: {}, rating: 4},
+            {name: 'Amity Lot', location: {}, rating: 'No rating available'},
+            {name: 'Lot 11', location: {}, rating: 4.1},
+            {name: 'Lot 44 UMass Amherst', location: {}, rating: 4.2},
+            {name: 'Lot 65', location: {}, rating: 'No rating available'},
+            {name: 'Lot 49', location: {}, rating: 3.8},
+            {name: 'Lot 41', location: {}, rating: 'No rating available'},
+            {name: 'Whitmore Administration Parking Lot', location: {}, rating: 'No rating available'},
+            {name: 'Lot 34', location: {}, rating: 'No rating available'}
+        ];
 
+        const parkingListContainer = document.getElementById("parking-list");
+
+        parkingList.forEach((parkingLot) => {
+          const parkingDiv = document.createElement("div");
+          parkingDiv.classList.add("parking-lot-info");
+
+    const lotName = document.createElement('p');
+    lotName.textContent = parkingLot.name;
+    lotName.classList.add('parking-lot-name');
+
+    const lotDistance = document.createElement('span');
+    const distanceContent = "<" + "100" + "m";
+    lotDistance.textContent = distanceContent;
+    lotDistance.classList.add('distance');
+
+    const lotInfo = document.createElement('p');
+    infoContent = "Availability: " + "20" + "%    " + "Price: $" + "25" + "/hr, $" + "100" + "/day";
+    lotInfo.textContent = infoContent;
+    // lotInfo.classList.add('parking-lot-name');
+
+    parkingDiv.appendChild(lotName);
+    parkingDiv.appendChild(lotDistance);
+    parkingDiv.appendChild(lotInfo);
+
+    parkingListContainer.appendChild(parkingDiv);
+    // console.log(1);
+  });
+      </script>
     </div>
 
 </body>
