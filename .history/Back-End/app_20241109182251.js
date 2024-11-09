@@ -116,8 +116,8 @@ client.connect()
             { $set: { price: Number(price) } }
         );
         
-    }else if (location_id === valid_location[0]["location_id"]
-         && price === valid_location[0]['price']){
+    }else if (invalid[0]["location_id"]===valid_location[0]["location_id"]
+         && invalid[0]['price']===valid_location[0]['price']){
           console.log("reached")
         // update valid input
         await parking_lot.updateOne(
