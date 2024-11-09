@@ -6,7 +6,9 @@ const place_id = params.get("id");
 const name = params.get("name");
 const googleRate = params.get("rate");
 const distance = params.get("distance");
-const address = params.get("address")
+const address = params.get("address");
+console.log(distance);
+console.log(address);
 //Access parking lot data from two database.
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("Page loaded.");
