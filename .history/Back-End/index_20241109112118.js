@@ -17,9 +17,11 @@ async function find(query) {
   
       const result = await parking_lot.findOne(query);
       console.log(result)
-
-
+      // Middleware to parse JSON request bodies
+      
+            
     } finally {
+  
       // Ensures that the client will close when you finish/error
       await client.close();
     }

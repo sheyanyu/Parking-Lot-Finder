@@ -9,23 +9,41 @@ const client = new MongoClient(uri);
 const database = client.db('parkingdb');
 const parking_lot = database.collection('parking_lot');
 const unvalidated = database.collection('invalid');
+const result = {"_id":{"$oid":0},
+                "weekday":{"$numberInt":"0"},
+                "ticket":{"$date":{"$numberLong":"946702800000"}},"time":{"$date":{"$numberLong":"946702800000"}},
+                "price":{"$numberInt":"0"},
+                "occupation":{"$numberInt":"0"}}
 
 
-async function find(query) {
+async function find() {
 
     try {
   
+      const query = {weekday:1};
       const result = await parking_lot.findOne(query);
       console.log(result)
+      // Middleware to parse JSON request bodies
+      app.use(express.json());
 
+      // API endpoint to GET all items in the dataset
+      app.get('/items', (req, res) => {
+        res.json(result);
+      });
 
+      // Start the server
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
+            
     } finally {
+  
       // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
 
-//  find();
+ find();
  
   async function write({
     location: [lat,lon],
@@ -68,3 +86,5 @@ async function find(query) {
 //   price: 2,
 //   occupation: 3
 // }).catch(console.dir);
+
+

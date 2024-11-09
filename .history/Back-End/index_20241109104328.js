@@ -17,15 +17,27 @@ async function find(query) {
   
       const result = await parking_lot.findOne(query);
       console.log(result)
+      // Middleware to parse JSON request bodies
+      app.use(express.json());
 
+      // API endpoint to GET all items in the dataset
+      app.get('/items', (req, res) => {
+        res.json(result);
+      });
 
+      // Start the server
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
+            
     } finally {
+  
       // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
 
-//  find();
+ find();
  
   async function write({
     location: [lat,lon],
@@ -68,3 +80,26 @@ async function find(query) {
 //   price: 2,
 //   occupation: 3
 // }).catch(console.dir);
+
+// middleware to parse JSON bodies
+app.use(express.json()); // for parsing application/json
+
+// POST route to handle form data sent via AJAX
+app.post('/add-item', (req, res) => {
+  const { username, password } = req.body; // Get the data from the request body
+
+  console.log('Received data:', username, password);
+
+  // Process the data (e.g., authenticate, save to DB)
+  // Simulating response
+  if (username === 'user1' && password === '1234') {
+    return res.status(200).json({ message: 'Success!' });
+  } else {
+    return res.status(400).json({ message: 'Invalid credentials' });
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});

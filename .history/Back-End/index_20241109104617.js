@@ -17,15 +17,27 @@ async function find(query) {
   
       const result = await parking_lot.findOne(query);
       console.log(result)
+      // Middleware to parse JSON request bodies
+      app.use(express.json());
 
+      // API endpoint to GET all items in the dataset
+      app.get('/items', (req, res) => {
+        res.json(result);
+      });
 
+      // Start the server
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
+            
     } finally {
+  
       // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
 
-//  find();
+ find();
  
   async function write({
     location: [lat,lon],
@@ -68,3 +80,24 @@ async function find(query) {
 //   price: 2,
 //   occupation: 3
 // }).catch(console.dir);
+async function write({
+// middleware to parse JSON bodies
+app.use(express.json()); // for parsing application/json
+
+// POST route to handle form data sent via AJAX
+app.post('/add-item', (req, res) => {
+  const  formData = {
+    rating: ratingValue,
+    price: Number(price),
+    occupation: Number(occupation),
+    ticket: null
+} = req.body; // Get the data from the request body
+
+  console.log('Received data:', rating, price);
+
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
