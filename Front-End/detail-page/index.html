@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Main Page</title>
+  <title>Detail Page</title>
   <link rel="stylesheet" href="styles.css" />
   <script type="module" src="./scripts.js"></script>
   <script src="../../Back-End/map01/index2.js"></script>
@@ -17,18 +17,13 @@
   </header>
 
 
-
-    <div id="map">
-
-    </div>
+    <div id="map"></div>
 
 
     <div class="background-color">
 
-
-
         <div class="parking-card">
-          <h1>1. Parking lot A</h1>
+          <!-- <h1>1. Parking lot A</h1>
           <p class="distance">&lt;34m</p>
           <p>Address: 9 Flintlock Ln, Amherst, MA 01002</p>
           <p>Availability: 20%</p>
@@ -41,18 +36,25 @@
           </div>
           <div class="chart">
             <img src="曲线图.jpg" alt="Availability graph" style="width: 100%; height: auto;">
-          </div>
-          <div class="buttons">
+          </div> -->
+
+
+          <!-- <div class="buttons-option">
               <button class="button">&lt; Back</button>
               <button class="button" id="update">Update Info</button>
-          </div>
-
+          </div> -->
       </div>
-      <script>
+
+      <div class="buttons-option">
+        <button class="button" id="back">&lt; Back</button>
+        <button class="button" id="update">Update Info</button>
+      </div>
+
+      <!-- <script>
           const parkingList = [
             {name: 'Lot 46', location: {}, rating: 4},
           ];
-      </script>
+      </script> -->
     </div>
 
 </body>

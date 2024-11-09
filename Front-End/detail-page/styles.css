@@ -133,7 +133,7 @@ header h1 {
     width: 100% - 30px;
     max-width: 600px;
     max-height: 360px;
-    margin: 80px 15px;
+    margin: 80px 15px 0 15px;
     padding: 20px;
     background-color: #ffffff;
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
@@ -168,6 +168,8 @@ header h1 {
     margin-top: 20px;
 }
 .button {
+    margin-top: 20px;
+    margin-bottom: 15px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -178,6 +180,14 @@ header h1 {
 .button:hover {
     background-color: #ddd;
 }
+#back{
+    margin-left: 15px;
+}
+#update{
+    float: right;
+    margin-right: 15px;
+}
+
 .chart {
     margin-top: 20px;
 }
