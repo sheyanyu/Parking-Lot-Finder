@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     lotRisk.textContent = parkingLotRisk;
     // lotInfo.classList.add('parking-lot-name');
     
-
-
     const chartDiv1 = document.createElement('div');
     chartDiv1.className = 'chart';
 
