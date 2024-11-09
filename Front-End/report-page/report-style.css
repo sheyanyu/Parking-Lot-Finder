@@ -1,0 +1,174 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #E1E2F0;
+    margin: 0px;
+    position: relative;
+    font-family: 'Playfair Display', serif;;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+}
+
+.webLogo{
+    font-size: 2em;
+    color:#2b3185;
+    font-family:'Baskerville','Inter', Courier, monospace;
+
+}
+
+.rating-container {
+    background-color: #fff;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 85%;
+    max-width: 400px;
+    justify-content: center;
+    padding: 20px;
+    height: auto;
+}
+
+.park-lot-info{
+    display: flex;
+    gap: 15px;
+    height: 120px;
+    margin-bottom: 30px;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+}
+
+.parking-lot-name{
+    font-size: 2em;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.map-image {
+    width: 140px;                     
+    height: 140px;               
+    border-radius: 10px;        
+}
+
+.address{
+    color: #8a8a8a;
+}
+
+.parking-experience{
+    padding-top: 10px;    
+}
+
+.checked {
+    color: orange;
+  }
+
+.price-and-occupation {
+    display: flex;
+    gap: 60px;
+}
+
+.input-field {
+    display: flex;
+    margin-top: 5px;
+    width: 90px;
+}
+.input {
+    width: 60%;
+    height: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: none; 
+    background-color: #f0f0f0;
+    font-size: 10px;
+}
+
+.ticket-container {
+    margin-top: 20px;
+}
+
+.ticket-options {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.ticket-button {
+    padding: 5px 20px;
+    border-radius: 20px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 13px;
+    color: #8a8a8a;
+    text-align: center;
+}
+
+input[type="radio"] {
+    display: none; 
+}
+
+input[type="radio"]:checked + .ticket-button {
+    background-color: #e0e0e0;
+    color: #2b3185;
+    font-weight: bold;
+}
+
+.ticket-button:hover {
+    background-color: #eaeaea;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px; /* Adjust width as needed */
+}
+
+.back-button,
+.submit-button {
+    padding: 15px 30px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover,
+.submit-button:hover {
+    background-color: #e0e0e0;
+}
+
+.ticket-time-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#ticket-time {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #d3d3d3;
+    background-color: #f7f7f7;
+    font-size: 16px;
+}

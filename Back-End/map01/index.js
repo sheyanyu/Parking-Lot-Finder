@@ -100,16 +100,18 @@ function createMap(center) {
   function emitParkingList() {
     const event = new CustomEvent('parkingListUpdated', { detail: parking_list });
     document.dispatchEvent(event);
+    console.log("create event");
+    console.log(event);
   }
 
-  // // Initialize search box
-  // const input = document.createElement('div');
-  // input.classList.add('search-bar');
-  // input.innerHTML = `
-  //   <input id="pac-input" type="text" placeholder="Search for places...">
-  //   <button class="search-btn">🔍</button>
-  // `;
-  input = document.getElementById("ni de search bar id")
+  // Initialize search box
+  const input = document.createElement('div');
+  input.classList.add('search-bar');
+  input.innerHTML = `
+    <input id="pac-input" type="text" placeholder="Search for places...">
+    <button class="search-btn">🔍</button>
+  `;
+  // const input = document.getElementsByClassName("search-bar")
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   const searchBoxInput = input.querySelector('#pac-input');
@@ -188,3 +190,5 @@ document.head.insertAdjacentHTML('beforeend', `
     }
   </style>
 `);
+
+// export { initMap };

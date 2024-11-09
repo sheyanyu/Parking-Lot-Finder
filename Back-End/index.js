@@ -2,6 +2,10 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const express = require('express');
+const app = express();
+const port = 3000;
+
 const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://sylvia:4xs2pp1R6EVSd8k5@parkinglotfinder.jj5d2.mongodb.net/?retryWrites=true&w=majority&appName=ParkingLotFinder";
 const client = new MongoClient(uri);
