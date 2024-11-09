@@ -23,6 +23,7 @@ async function find(query) {
   }
 
 //  find();
+ 
   async function write({
     location: [lat,lon],
     price: price_input,
@@ -52,7 +53,9 @@ async function find(query) {
         console.log(result); 
 
     } finally {
+
         await client.close(); 
+
     }
 
 }

@@ -66,6 +66,7 @@ app.get('/items', async (req, res) => {
   }
 });
 
+
 // Function to fetch data from the parking_lot collection by location ID
 async function getData(id) {
     try {

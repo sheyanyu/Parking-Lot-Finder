@@ -13,6 +13,7 @@ const unvalidated = database.collection('invalid');
 
 
 async function find(query) {
+
     try {
       const result = await parking_lot.findOne(query);
       console.log(result)
@@ -23,6 +24,7 @@ async function find(query) {
   }
 
 //  find();
+ 
   async function write({
     location: [lat,lon],
     price: price_input,
@@ -52,7 +54,9 @@ async function find(query) {
         console.log(result); 
 
     } finally {
+
         await client.close(); 
+
     }
 
 }

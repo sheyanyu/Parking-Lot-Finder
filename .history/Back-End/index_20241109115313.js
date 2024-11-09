@@ -52,7 +52,9 @@ async function find(query) {
         console.log(result); 
 
     } finally {
+
         await client.close(); 
+
     }
 
 }

@@ -1,4 +1,3 @@
-const { ready } = require('@tensorflow/tfjs-core');
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -13,7 +12,9 @@ const unvalidated = database.collection('invalid');
 
 
 async function find(query) {
+
     try {
+  
       const result = await parking_lot.findOne(query);
       console.log(result)
     } finally {
@@ -23,6 +24,7 @@ async function find(query) {
   }
 
 //  find();
+ 
   async function write({
     location: [lat,lon],
     price: price_input,
@@ -52,7 +54,9 @@ async function find(query) {
         console.log(result); 
 
     } finally {
+
         await client.close(); 
+
     }
 
 }
@@ -62,8 +66,3 @@ async function find(query) {
 //   price: 2,
 //   occupation: 3
 // }).catch(console.dir);
-async function replace(query) {
-    // if ready_to_replace():
-        parking_lots.updateOne(location_id, price)
-
-}

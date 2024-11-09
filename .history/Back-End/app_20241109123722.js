@@ -66,6 +66,9 @@ app.get('/items', async (req, res) => {
   }
 });
 
+
+
+
 // Function to fetch data from the parking_lot collection by location ID
 async function getData(id) {
     try {
@@ -94,6 +97,33 @@ app.get('/items', async (req, res) => {
         console.log(data)
     } catch (error) {
         res.status(500).send("Error fetching data");
+    }
+});
+
+// Post route to submit data (if needed for your form)
+app.post('/submit', async (req, res) => {
+    const {
+        rating,
+        price,
+        occupation,
+        ticket,
+        ticketTime
+    } = req.body;
+
+    try {
+        // Insert the data into the unvalidated collection
+        const result = await unvalidated.insertOne({
+            rating: Number(rating),
+            price: Number(price),
+            occupation: Number(occupation),
+            ticket: ticket,
+            ticketTime: ticket === "yes" ? ticketTime : null
+        });
+
+        res.status(201).json({ message: "Data submitted successfully", insertedId: result.insertedId });
+    } catch (error) {
+        console.error("Error inserting data:", error);
+        res.status(500).json({ message: "Error submitting data" });
     }
 });
 
