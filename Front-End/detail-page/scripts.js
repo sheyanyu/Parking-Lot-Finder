@@ -9,6 +9,7 @@ const distance = params.get("distance");
 const address = params.get("address");
 console.log(distance);
 console.log(address);
+let parkingLots = null;
 //Access parking lot data from two database.
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("Page loaded.");
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
       
         if (response.ok) {
-        const parkingLots = await response.json();
+        parkingLots = await response.json();
         console.log("Fetched Parking Lots:", parkingLots);
         } else {
         console.error("Failed to fetch parking lots:", response.statusText);
@@ -47,24 +48,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     lotDistance.classList.add('distance');
 
     const lotAddress = document.createElement('p');
-    const parkingLotAddress = address;
+    const parkingLotAddress = `Address: ${address}`;
     lotAddress.textContent = parkingLotAddress;
     // lotInfo.classList.add('parking-lot-name');
 
-
+    let availabilityPersent;
+    let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    const availabilityPersent = parkingLots.availability;
-    const parkingLotAvailability = `Availability: ${availabilityPersent}%`;
+    if (parkingLots === null) {
+        parkingLotAvailability = `Availability: None`;
+    } else {
+        availabilityPersent = parkingLots.availability;
+        parkingLotAvailability = `Availability: ${availabilityPersent}%`;
+}
     lotAvailability.textContent = parkingLotAvailability;
     // lotInfo.classList.add('parking-lot-name');
 
     const lotRate = document.createElement('p');
 
         const starSpan = document.createElement('span');
-        if(parkingLots.rate != null) {const rate = parkingLots.rate}
-        else if (googleRate != null) {const rate = googleRate}
-        else {const rate = 0; starSpan.innerHTML += "None";}
+        let rate;
+        if (typeof parkingLots !== 'undefined') {
+            if(parkingLots.rate != null) {rate = parkingLots.rate;}
+            else if (googleRate != null) {rate = googleRate;}
+            else {rate = 0; starSpan.innerHTML += "None";}
+        } else {
 
+            if (googleRate != null) {rate = googleRate;}
+            else {rate = 0; starSpan.innerHTML += "None";}
+        }
         for (let i = rate; i>0; i--) {
             starSpan.innerHTML += "⭐";
         }
@@ -77,8 +89,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const lotPrice = document.createElement('p');
-    const price = parkingLots.price;
-    const parkingLotPrice = `Price: $${price}/hour`;
+    let price;
+    let parkingLotPrice;
+    // if (typeof parkingLots === 'undefined') {
+        if (parkingLots === null) {
+
+        parkingLotPrice = "Price: None";
+    } else {
+        price = parkingLots[0]['price'];
+        parkingLotPrice = `Price: $${price}/hour`;
+    }
+     
     lotPrice.textContent = parkingLotPrice;
     // lotInfo.classList.add('parking-lot-name');
 

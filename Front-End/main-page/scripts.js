@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (event.target.closest(".parking-lot-info")) {
                 // const boardCastLocation = new URLSearchParams(parkingLot.location);
-                const query = `lat=${parkingLot.location.lat}&lng=${parkingLot.location.lng}&name=${parkingLot.name}&id=${parkingLot.place_id}&distance=${parkingLot.distance}&rate=${parkingLot.rating}&address=${parkingLot.address}`;
+                const query = `lat=${parkingLot.location.lat}&lng=${parkingLot.location.lng}&name=${parkingLot.name}&id=${parkingLot.place_id}&distance=${Math.round(parkingLot.distance*1000)}&rate=${parkingLot.rating}&address=${parkingLot.address}`;
                 window.location.href = `../detail-page/index.html?${query}`;
                 console.log("Redirecting to detail page");
             }
@@ -43,12 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
             lotName.classList.add('parking-lot-name');
 
             const lotDistance = document.createElement('span');
-            const distanceContent = "<" + "100" + "m";
-            lotDistance.textContent = distanceContent;
+
+            lotDistance.textContent = `<${Math.round(parkingLot.distance*1000)}m`;
             lotDistance.classList.add('distance');
 
             const lotInfo = document.createElement('p');
-            const infoContent = "Availability: " + "20" + "%    " + "Price: $" + "25" + "/hr, $" + "100" + "/day";
+            
+            const infoContent = `Availability: 20%    Price: $25/hr`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 
