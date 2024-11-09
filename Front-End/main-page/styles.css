@@ -114,6 +114,7 @@ header h1 {
     /* margin-bottom: 10px; */
     /* border-radius: 10px; */
     font-family: 'Inter', 'Courier New', Courier, monospace;
+    cursor: pointer;
 }
 
 .parking-lot-name {

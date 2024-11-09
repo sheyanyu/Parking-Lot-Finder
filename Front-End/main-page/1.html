@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .parking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .parking-item {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .parking-item h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .parking-item p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="parking-list" id="parking-list"></div>
+
+    <script>
+        const parkingList = [
+            {name: 'Lot 46', location: {}, rating: 4},
+            {name: 'Lot 13', location: {}, rating: 2.3},
+            {name: 'North Pleasant St. Public Lot', location: {}, rating: 4.5},
+            {name: 'Boltwood Garage', location: {}, rating: 4},
+            {name: 'Amity Lot', location: {}, rating: 'No rating available'},
+            {name: 'Lot 11', location: {}, rating: 4.1},
+            {name: 'Lot 44 UMass Amherst', location: {}, rating: 4.2},
+            {name: 'Lot 65', location: {}, rating: 'No rating available'},
+            {name: 'Lot 49', location: {}, rating: 3.8},
+            {name: 'Lot 41', location: {}, rating: 'No rating available'},
+            {name: 'Whitmore Administration Parking Lot', location: {}, rating: 'No rating available'},
+            {name: 'Lot 34', location: {}, rating: 'No rating available'}
+        ];
+
+        const parkingListContainer = document.getElementById('parking-list');
+
+        parkingList.forEach(lot => {
+            const lotElement = document.createElement('div');
+            lotElement.classList.add('parking-item');
+
+            const lotName = document.createElement('h2');
+            lotName.textContent = lot.name;
+            lotElement.appendChild(lotName);
+
+            const lotRating = document.createElement('p');
+            lotRating.textContent = `Rating: ${lot.rating}`;
+            lotElement.appendChild(lotRating);
+
+            parkingListContainer.appendChild(lotElement);
+        });
+    </script>
+</body>
+</html>
