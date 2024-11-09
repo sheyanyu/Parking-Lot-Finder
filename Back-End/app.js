@@ -78,12 +78,21 @@ client.connect()
             price,
             occupation,
             ticket,
+            ticketTime
         } = req.body;
 
   // Log received data
   console.log('Received data:', location_id, rating, price, occupation, ticket, ticketTime);
   
   try {
+    const result = await unvalidated.insertOne({
+        location_id: location_id,
+        time: time,
+        rating: Number(rating),
+        price: Number(price),
+        occupation: Number(occupation),
+        ticket: ticket
+    });
    
     const invalid_inputs = get_awaiting_Data(location_id);
     const valid_location = get_valid_Data(location_id);
@@ -94,7 +103,7 @@ client.connect()
          && result[price]==valid_location[price])){
 
         // update valid input
-        result = await valid_location.updateOne(
+        result = await parking_lot.updateOne(
             { location_id: location_id },
             {
                 $push: {
@@ -106,16 +115,7 @@ client.connect()
                   }
             }
           );
-    }else{
-         // Insert the data into the unvalidated collection
-        const result = await unvalidated.insertOne({
-            location_id: location_id,
-            time: time,
-            rating: Number(rating),
-            price: Number(price),
-            occupation: Number(occupation),
-            ticket: ticket
-        });
+        
     }
     
         
@@ -127,54 +127,6 @@ client.connect()
   }
 });
 
-<<<<<<< HEAD
-
-=======
-// app.get('/items', async (req, res) => {
-//   try {
-//     const items = await parking_lot.find().toArray();
-//     res.json(items);
-//   } catch (error) {
-//     console.error("Error retrieving items:", error);
-//     res.status(500).json({ message: "Error retrieving items" });
-//   }
-// });
-
-// Function to fetch data from the parking_lot collection by location ID
-async function getData(id) {
-    try {
-        
-        // Query the parking_lot collection using the location (or _id) filter
-        const data = await parking_lot.find({ id:  Number(id) }).toArray();
-        return data;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
-    }
-}
-
-// Route to get data from MongoDB using location (id)
-app.get('/items', async (req, res) => {
-    const { id } = req.query; 
-    
-    if (!id) {
-        return res.status(400).json({ message: "ID parameter is required" });
-    }
-
-    try {
-        const data = await getData(id); // Fetch data by location
-        res.json(data); // Return the data as JSON response
-        console.log(data)
-    } catch (error) {
-        res.status(500).send("Error fetching data");
-    }
-});
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
->>>>>>> 3d028100d7665760467552b58bc54406a97393eb
 
 module.exports = {
     get_valid_Data,
