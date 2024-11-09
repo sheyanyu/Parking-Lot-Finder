@@ -1,6 +1,6 @@
-const selected = { lat: 42.391155, lng: -72.526711 };
+const selected = { lat: 42.391155, lng: -72.526711 }; //待修改
 let newMap; // Use a different map variable
-const API_KEY = 'API';
+const API_KEY = 'AIzaSyDp384GSknnjuAe0sa5ythFd5Ou-fvy4Ns';
 
 function initNewMap() {
   // Ensure that the map container exists before initializing the map

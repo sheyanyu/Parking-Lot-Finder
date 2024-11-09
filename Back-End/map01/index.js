@@ -1,4 +1,4 @@
-const API_KEY = 'API';
+const API_KEY = 'AIzaSyDp384GSknnjuAe0sa5ythFd5Ou-fvy4Ns';
 let map, userMarker;
 const locations = [];
 let parking_list = [];
