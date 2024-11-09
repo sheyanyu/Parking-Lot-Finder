@@ -10,6 +10,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const name = params.get("name");
     const address = params.get("address")
 
+    console.log(name);
+    console.log(address);
+
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML = '';
+
+    const ratingTextDiv = document.createElement("div");
+    ratingTextDiv.className = "rating-text";
+    ratingTextDiv.textContent = "I am rating...";
+    const nameDiv = document.createElement("div");
+    nameDiv.className = "parking-lot-name";
+    nameDiv.textContent = name;
+    const addressDiv = document.createElement("div");
+    addressDiv.className = "address";
+    addressDiv.textContent = address;
+
+
+    detailsContainer.appendChild(ratingTextDiv);
+    detailsContainer.appendChild(nameDiv);
+    detailsContainer.appendChild(addressDiv);
+
+
+
     function handleTicketChange() {
         if (yesTicketInput.checked) {
             ticketTimeContainer.style.display = "flex";
