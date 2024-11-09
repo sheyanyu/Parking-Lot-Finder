@@ -1,8 +1,8 @@
-const API_KEY = 'API';
+const API_KEY = 'AIzaSyDp384GSknnjuAe0sa5ythFd5Ou-fvy4Ns';
 let map;
 const locations = [];
 let parking_list = [];
-let disableSearch = false; // Add flag to control bounds_changed trigger
+let disableSearch = false;
 
 // Get current location and initialize map
 function initMap() {
@@ -103,9 +103,16 @@ function createMap(center) {
   }
 
   // Initialize search box
-  const input = document.getElementById('pac-input');
-  const searchBox = new google.maps.places.SearchBox(input);
+  const input = document.createElement('div');
+  input.classList.add('search-bar');
+  input.innerHTML = `
+    <input id="pac-input" type="text" placeholder="Search for places...">
+    <button class="search-btn">🔍</button>
+  `;
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  const searchBoxInput = input.querySelector('#pac-input');
+  const searchBox = new google.maps.places.SearchBox(searchBoxInput);
 
   // Adjust the bounds of the search box
   map.addListener("bounds_changed", () => {
@@ -155,3 +162,28 @@ function loadGoogleMapsScript() {
 
 loadGoogleMapsScript();
 
+// CSS for search bar styling
+document.head.insertAdjacentHTML('beforeend', `
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+    }
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+    .search-btn {
+      background: none;
+      border: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #888;
+      margin-left: -40px;
+    }
+  </style>
+`);
