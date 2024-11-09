@@ -127,7 +127,54 @@ client.connect()
   }
 });
 
+<<<<<<< HEAD
 
+=======
+// app.get('/items', async (req, res) => {
+//   try {
+//     const items = await parking_lot.find().toArray();
+//     res.json(items);
+//   } catch (error) {
+//     console.error("Error retrieving items:", error);
+//     res.status(500).json({ message: "Error retrieving items" });
+//   }
+// });
+
+// Function to fetch data from the parking_lot collection by location ID
+async function getData(id) {
+    try {
+        
+        // Query the parking_lot collection using the location (or _id) filter
+        const data = await parking_lot.find({ id:  Number(id) }).toArray();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
+
+// Route to get data from MongoDB using location (id)
+app.get('/items', async (req, res) => {
+    const { id } = req.query; 
+    
+    if (!id) {
+        return res.status(400).json({ message: "ID parameter is required" });
+    }
+
+    try {
+        const data = await getData(id); // Fetch data by location
+        res.json(data); // Return the data as JSON response
+        console.log(data)
+    } catch (error) {
+        res.status(500).send("Error fetching data");
+    }
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+>>>>>>> 3d028100d7665760467552b58bc54406a97393eb
 
 module.exports = {
     get_valid_Data,
