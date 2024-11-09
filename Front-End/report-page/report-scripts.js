@@ -69,33 +69,7 @@ submitButton.addEventListener('click', async () => {
 
 
     console.log("Form Data:", formData);
-    /*
-    try {
-        // Send the data to your backend
-        const response = await fetch('/api/report-parking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
-
-        if (response.ok) {
-            console.log("Data submitted successfully!");
-            alert("Thanks for submitting your review!");
-            // Reset the input fields after submission
-            document.getElementById('priceInput').value = '';
-            document.getElementById('occupationInput').value = '';
-            yesTicketInput.checked = false;
-            noTicketInput.checked = false;
-            ticketTimeContainer.style.display = "none";
-            updateStars(0); // Reset star rating
-        } else {
-            console.error("Failed to submit data");
-            alert("Something went wrong. Please try again.");
-        }
-    } catch (error) {
-        console.error("Error submitting data:", error);
-        alert("An error occurred. Please try again later.");
-    } */
 });
+
+const back = document.querySelector(".back-button");
+back.addEventListener("click", () => {window.location.href = '../detail-page/index.html';});
