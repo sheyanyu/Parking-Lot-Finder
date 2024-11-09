@@ -1,5 +1,5 @@
-const API_KEY = 'AIzaSyDp384GSknnjuAe0sa5ythFd5Ou-fvy4Ns';
-let map, userMarker;
+const API_KEY = 'API';
+let map;
 const locations = [];
 let parking_list = [];
 let disableSearch = false; // Add flag to control bounds_changed trigger
@@ -33,13 +33,6 @@ function createMap(center) {
     zoom: 13,
     center: center,
     mapId: 'da37f3254c6a6d1c',
-  });
-
-  // User marker setup
-  userMarker = new google.maps.Marker({
-    position: center,
-    map: map,
-    title: 'You',
   });
 
   let parkingMarkers = [];
@@ -108,6 +101,49 @@ function createMap(center) {
     const event = new CustomEvent('parkingListUpdated', { detail: parking_list });
     document.dispatchEvent(event);
   }
+
+  // Initialize search box
+  const input = document.getElementById('pac-input');
+  const searchBox = new google.maps.places.SearchBox(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Adjust the bounds of the search box
+  map.addListener("bounds_changed", () => {
+    searchBox.setBounds(map.getBounds());
+  });
+
+  let markers = []; // Array to hold the searched location markers
+
+  // Handle the event when a place is selected from the search box
+  searchBox.addListener("places_changed", () => {
+    const places = searchBox.getPlaces();
+    if (places.length === 0) return;
+
+    // Clear previous markers
+    markers.forEach((marker) => marker.setMap(null));
+    markers = [];
+
+    // Add a marker for each selected place
+    places.forEach((place) => {
+      if (!place.geometry || !place.geometry.location) {
+        console.log("Returned place contains no geometry");
+        return;
+      }
+
+      const marker = new google.maps.Marker({
+        map: map,
+        title: place.name,
+        position: place.geometry.location,
+      });
+      markers.push(marker);
+    });
+
+    // Adjust the map to fit the selected place
+    if (places[0] && places[0].geometry) {
+      map.setCenter(places[0].geometry.location);
+      map.setZoom(15);
+    }
+  });
 }
 
 function loadGoogleMapsScript() {
@@ -118,3 +154,4 @@ function loadGoogleMapsScript() {
 }
 
 loadGoogleMapsScript();
+
