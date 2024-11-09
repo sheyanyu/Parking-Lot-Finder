@@ -38,7 +38,7 @@ client.connect()
         }
 
         try {
-            const data = await get_valid_Data(id); // Fetch data by location
+            const data = await get_awaiting_Data(id); // Fetch data by location
             res.json(data); // Return the data as JSON response
             console.log(data);
         } catch (error) {
@@ -48,6 +48,7 @@ client.connect()
 
   // Function to fetch data from the parking_lot collection by location ID
     async function get_valid_Data(id) {
+        
       try {
         
           // Query the parking_lot collection using the location (or _id) filter
@@ -85,36 +86,32 @@ client.connect()
   console.log('Received data:', location_id, rating, price, occupation, ticket, ticketTime);
   
   try {
-    const result = await unvalidated.insertOne({
-        location_id: location_id,
-        time: time,
-        rating: Number(rating),
-        price: Number(price),
-        occupation: Number(occupation),
-        ticket: ticket
-    });
-   
+    const result = {
+        'location_id': "ChIJW4qs73XS5okRwAauJFY7j1E",
+        'time': time,
+        'rating': Number(rating),
+        'price': Number(price),
+        'occupation': Number(occupation),
+        'ticket': ticket
+    }
+    await unvalidated.insertOne(result);
+    
     const invalid_inputs = get_awaiting_Data(location_id);
-    const valid_location = get_valid_Data(location_id);
+    const valid_location = get_valid_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
+    console.log(result)
     if (invalid_inputs.length>=5 || //case: invalid count>5
 
         //case: valid inputs
         (result['location_id']==valid_location['location_id']
-         && result[price]==valid_location[price])){
+         && result['price']==valid_location['price'])){
 
         // update valid input
-        result = await parking_lot.updateOne(
-            { location_id: location_id },
-            {
-                $push: {
-                    time: time,                  // Append a single string to the 'time' array
-                    rating: rating,              // Append a single string (or number) to the 'rating' array
-                    price: price,                // Append a single string (or number) to the 'price' array
-                    occupation: occupation,      // Append a single string (or number) to the 'occupation' array
-                    ticket: ticket               // Append a single string to the 'ticket' array
-                  }
-            }
-          );
+        console.log(typeof valid_location['time'])
+        valid_location['time'].push(time);
+        valid_location['rating'].push(Number(rating));
+        valid_location['price'].push(Number(price));
+        valid_location['occupation'].push(Number(occupation));
+        valid_location['ticket'].push(ticket);
         
     }
     
