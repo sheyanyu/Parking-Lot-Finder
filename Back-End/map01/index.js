@@ -15,6 +15,14 @@ function initMap() {
         };
         locations.push({ key: 'You', location: pos });
         createMap(pos); // Initialize map with user's location
+
+        // Add a custom colored marker for the user's location
+        const userMarker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          title: 'Your Location',
+        });
       },
       (error) => {
         console.error('Error getting location:', error);
@@ -28,11 +36,14 @@ function initMap() {
   }
 }
 
+
 function createMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: center,
     mapId: 'da37f3254c6a6d1c',
+    mapTypeControl: false,
+    streetViewControl: false
   });
 
   let parkingMarkers = [];
@@ -69,7 +80,6 @@ function createMap(center) {
       Math.sin(dLon/2) * Math.sin(dLon/2); 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     const d = R * c; // Distance in km
-    console.log(d);
     return d;
   }
   
@@ -144,7 +154,6 @@ function createMap(center) {
     <input id="pac-input" type="text" placeholder="Search for places...">
     <button class="search-btn">🔍</button>
   `;
-  // const input = document.getElementsByClassName("search-bar")
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   const searchBoxInput = input.querySelector('#pac-input');
