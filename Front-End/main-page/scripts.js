@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
             // parkingDiv.id = index;
             parkingDiv.addEventListener("click", (event) => {
 
-            const event = new CustomEvent('UserClickedOnList');
-            document.dispatchEvent(event);
+            const event02 = new CustomEvent('UserClickedOnList');
+            document.dispatchEvent(event02);
             console.log("create event");
-            console.log(event);
+            console.log(event02);
 
             if (event.target.closest(".parking-lot-info")) {
                 // const boardCastLocation = new URLSearchParams(parkingLot.location);
