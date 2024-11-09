@@ -137,8 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
     title.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
 
     const update = document.getElementById("update");
-    const query = `place_id=${place_id}&name=${name}&address=${address}`;
-    update.addEventListener("click", () => {window.location.href = `../report-page/index.html?${query}`;});
+    update.addEventListener("click", () => {window.location.href = `../report-page/index.html?${params}`;});
+
 
     const back = document.getElementById("back");
     back.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
