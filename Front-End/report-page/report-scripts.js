@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     ticketTimeContainer.style.display = "none";
 
+    const params = new URLSearchParams(window.location.search);
+    const place_id = params.get("place_id");
+    const name = params.get("name");
+    const address = params.get("address")
 
     function handleTicketChange() {
         if (yesTicketInput.checked) {
