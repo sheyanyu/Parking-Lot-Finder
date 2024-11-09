@@ -15,6 +15,14 @@ function initMap() {
         };
         locations.push({ key: 'You', location: pos });
         createMap(pos); // Initialize map with user's location
+
+        // Add a custom colored marker for the user's location
+        const userMarker = new google.maps.Marker({
+          position: pos,
+          map: map,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          title: 'Your Location',
+        });
       },
       (error) => {
         console.error('Error getting location:', error);
@@ -28,11 +36,14 @@ function initMap() {
   }
 }
 
+
 function createMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: center,
     mapId: 'da37f3254c6a6d1c',
+    mapTypeControl: false,
+    streetViewControl: false
   });
 
   let parkingMarkers = [];
@@ -54,6 +65,28 @@ function createMap(center) {
     }, 500);
   });
 
+  function calculate_distance(point1, point2){
+    const lat1 = point1.lat;
+    const lng1 = point1.lng;
+    const lat2 = point2.lat();
+    const lng2 = point2.lng();
+    
+    const R = 6371; // Radius of the earth in km
+    const dLat = deg2rad(lat2 - lat1);
+    const dLon = deg2rad(lng2 - lng1); 
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2); 
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    const d = R * c; // Distance in km
+    return d;
+  }
+  
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+
   // Function to search for parking spots in the current bounds
   async function SearchParking(bounds) {
     // Clear previous parking markers
@@ -66,12 +99,20 @@ function createMap(center) {
     const request = {
       bounds: bounds,
       type: ['parking'],
-      fields: ['geometry', 'name', 'rating'],
+      fields: ['geometry', 'name', 'rating', 'place_id', 'vicinity'],
     };
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         results.forEach((place) => {
+          console.log(place.vicinity);
+          if (place.geometry && place.geometry.location) {
+            distance = calculate_distance(locations[0].location, place.geometry.location);
+          } else {
+            console.log("Invalid place geometry.");
+          }
+          
+          distance = calculate_distance(locations[0].location, place.geometry.location);
           parking_list.push({
             name: place.name,
             location: {
@@ -79,6 +120,10 @@ function createMap(center) {
               lng: place.geometry.location.lng(),
             },
             rating: place.rating || "No rating available",
+            place_id: place.place_id || 'no place_id available',
+            // in km
+            distance: distance, 
+            address: place.vicinity || 'no address available',
           });
 
           const marker = new google.maps.Marker({
@@ -111,7 +156,6 @@ function createMap(center) {
     <input id="pac-input" type="text" placeholder="Search for places...">
     <button class="search-btn">🔍</button>
   `;
-  // const input = document.getElementsByClassName("search-bar")
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   const searchBoxInput = input.querySelector('#pac-input');
@@ -190,5 +234,3 @@ document.head.insertAdjacentHTML('beforeend', `
     }
   </style>
 `);
-
-// export { initMap };
