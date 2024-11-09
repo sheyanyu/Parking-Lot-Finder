@@ -1,5 +1,30 @@
 // import {loadNewGoogleMapsScript} from "../../Back-End/map01/index2.js";
 
+//Access parking lot data from two database.
+try {
+    // Send data to the backend
+    const response = await fetch("http://localhost:3000/submit", {
+        method: 'get',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+        console.log("Success:", result);
+        alert("Item added successfully!");
+    } else {
+        console.error("Failed to submit:", response.statusText);
+    }
+} catch (error) {
+    console.error("Error:", error);
+}
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log(111111111111);
 
@@ -14,6 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const back = document.getElementById("back");
     back.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
 
+
+
+
+
+
+//Creating Parking Lot detail block
     const detailContainer = document.querySelector(".parking-card");
 
     const lotName = document.createElement('h1');
