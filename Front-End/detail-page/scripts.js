@@ -9,6 +9,7 @@ const distance = params.get("distance");
 const address = params.get("address");
 console.log(distance);
 console.log(address);
+let parkingLots = null;
 //Access parking lot data from two database.
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("Page loaded.");
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
       
         if (response.ok) {
-        const parkingLots = await response.json();
+        parkingLots = await response.json();
         console.log("Fetched Parking Lots:", parkingLots);
         } else {
         console.error("Failed to fetch parking lots:", response.statusText);
@@ -54,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let availabilityPersent;
     let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    if (typeof parkingLots == 'undefined') {
+    if (parkingLots === null) {
         parkingLotAvailability = `Availability: None`;
     } else {
         availabilityPersent = parkingLots.availability;
@@ -90,10 +91,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const lotPrice = document.createElement('p');
     let price;
     let parkingLotPrice;
-    if (typeof parkingLots == 'undefined') {
+    // if (typeof parkingLots === 'undefined') {
+        if (parkingLots === null) {
+
         parkingLotPrice = "Price: None";
     } else {
-        price = parkingLots.price;
+        price = parkingLots[0]['price'];
         parkingLotPrice = `Price: $${price}/hour`;
     }
      
