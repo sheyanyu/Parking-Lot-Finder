@@ -28,6 +28,8 @@ const API_KEY = 'AIzaSyDp384GSknnjuAe0sa5ythFd5Ou-fvy4Ns';
     newMap = new google.maps.Map(mapElement, {
       zoom: 17.5,
       center: selected,
+      mapTypeControl: false,
+      streetViewControl: false
     });
   
     // Add a marker for the selected parking location
