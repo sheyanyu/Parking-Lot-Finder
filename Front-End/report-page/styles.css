@@ -91,10 +91,11 @@ body {
     display: flex;
     width: 90px;
     gap: 7px;
+    align-items: center;
     padding-top: 10px;
 }
 .input {
-    width: 60%;
+    width: 70%;
     height: 20px;
     padding: 15px;
     box-sizing: border-box;
@@ -123,6 +124,7 @@ body {
     font-size: 13px;
     color: #8a8a8a;
     text-align: center;
+    
 }
 
 input[type="radio"] {
