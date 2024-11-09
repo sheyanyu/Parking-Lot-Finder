@@ -72,8 +72,7 @@ client.connect()
     // POST route to handle form data
     app.post('/submit', async (req, res) => {
     // Destructure data from the request body
-    const { location_id,
-            time,
+  const {
             rating,
             price,
             occupation,
