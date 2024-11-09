@@ -38,7 +38,7 @@ client.connect()
         }
 
         try {
-            const data = await get_awaiting_Data(id); // Fetch data by location
+            const data = await get_valid_Data(id); // Fetch data by location
             res.json(data); // Return the data as JSON response
             console.log(data);
         } catch (error) {
