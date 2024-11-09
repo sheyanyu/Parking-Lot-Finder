@@ -72,7 +72,6 @@ async function getData(id) {
         
         // Query the parking_lot collection using the location (or _id) filter
         const data = await parking_lot.find({ id:  Number(id) }).toArray();
-        console.log("111",data)
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);

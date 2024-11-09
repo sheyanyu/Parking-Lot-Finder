@@ -99,12 +99,13 @@ function createMap(center) {
     const request = {
       bounds: bounds,
       type: ['parking'],
-      fields: ['geometry', 'name', 'rating', 'place_id'],
+      fields: ['geometry', 'name', 'rating', 'place_id', 'vicinity'],
     };
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         results.forEach((place) => {
+          console.log(place.vicinity);
           if (place.geometry && place.geometry.location) {
             distance = calculate_distance(locations[0].location, place.geometry.location);
           } else {
@@ -122,6 +123,7 @@ function createMap(center) {
             place_id: place.place_id || 'no place_id available',
             // in km
             distance: distance, 
+            address: place.vicinity || 'no address available',
           });
 
           const marker = new google.maps.Marker({
