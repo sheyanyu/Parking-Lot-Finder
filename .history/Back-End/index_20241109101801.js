@@ -29,7 +29,7 @@ async function find() {
 
     // API endpoint to GET all items in the dataset
     app.get('/items', (req, res) => {
-    res.json(result);
+    res.json(parking_lot.find({}).toArray());
     });
 
     // Start the server

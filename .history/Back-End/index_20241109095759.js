@@ -9,11 +9,7 @@ const client = new MongoClient(uri);
 const database = client.db('parkingdb');
 const parking_lot = database.collection('parking_lot');
 const unvalidated = database.collection('invalid');
-const result = {"_id":{"$oid":0},
-                "weekday":{"$numberInt":"0"},
-                "ticket":{"$date":{"$numberLong":"946702800000"}},"time":{"$date":{"$numberLong":"946702800000"}},
-                "price":{"$numberInt":"0"},
-                "occupation":{"$numberInt":"0"}}
+
 
 
 async function find() {
@@ -22,33 +18,31 @@ async function find() {
   
       const query = {weekday:1};
   
-      const result = await parking_lot.findOne(query);
-      console.log(result)
-    // Middleware to parse JSON request bodies
-    app.use(express.json());
+      const dataset = await parking_lot.findOne(query);
+      console.log(dataset)
 
-    // API endpoint to GET all items in the dataset
-    app.get('/items', (req, res) => {
-    res.json(result);
-    });
-
-    // Start the server
-    app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-    });
-            
+        
     } finally {
   
       // Ensures that the client will close when you finish/error
       await client.close();
     }
   }
-
- find();
+ 
  
 
-     
+      // Middleware to parse JSON request bodies
+      app.use(express.json());
 
+      // API endpoint to GET all items in the dataset
+      app.get('/items', (req, res) => {
+        res.json(parking_lot.find({}).toArray());
+      });
+
+      // Start the server
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
   async function write({
     location: [lat,lon],
     price: price_input,

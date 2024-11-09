@@ -24,19 +24,8 @@ async function find() {
   
       const result = await parking_lot.findOne(query);
       console.log(result)
-    // Middleware to parse JSON request bodies
-    app.use(express.json());
 
-    // API endpoint to GET all items in the dataset
-    app.get('/items', (req, res) => {
-    res.json(result);
-    });
-
-    // Start the server
-    app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-    });
-            
+        
     } finally {
   
       // Ensures that the client will close when you finish/error
@@ -47,7 +36,18 @@ async function find() {
  find();
  
 
-     
+      // Middleware to parse JSON request bodies
+      app.use(express.json());
+
+      // API endpoint to GET all items in the dataset
+      app.get('/items', (req, res) => {
+        res.json(parking_lot.find({}).toArray());
+      });
+
+      // Start the server
+      app.listen(port, () => {
+        console.log(`Server is running at http://localhost:${port}`);
+      });
 
   async function write({
     location: [lat,lon],
