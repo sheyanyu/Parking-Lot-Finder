@@ -6,7 +6,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Report the Lot</title>
     <script type="module" src="report-scripts.js"></script>
-    <link rel="stylesheet" href="report-style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="../../Back-End/map01/index2.js"></script>
+    <style>
+        #map {
+            width: 45%;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,7 +23,7 @@
     </header>
     <div class = "rating-container">
         <div class="park-lot-info">
-            <img src="map-placeholder.png" alt="Parking Lot Map" class="map-image">
+            <div id="map"></div>
             <div class = "details">
                 <div class="rating-text">I am rating...</div>
                 <div class="parking-lot-name">Parking Lot A</div>
@@ -37,12 +45,14 @@
                 <P>Price Per Hour</P>
                 <form class="input-field">
                      <input type="number" placeholder="" class="input" id = "priceInput" min="1">
+                     <span>$/hr</span>
                  </form> 
             </div>
             <div class="Occupation">
                 <P>Occupation</P>
                 <form class="input-field">
-                     <input type="number" placeholder="" class="input" id = "occupationInput" min="0" max="10">
+                     <input type="number" placeholder="" class="input" id = "occupationInput" min="0" max="100" step="0.1">
+                     <span>%</span>
                 </form> 
             </div>
         </div>

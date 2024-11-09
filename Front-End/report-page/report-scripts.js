@@ -41,3 +41,55 @@ function updateStars(rating) {
     star.classList.toggle('checked', index < rating);
   });
 }
+
+const submitButton = document.querySelector(".submit-button");
+
+
+submitButton.addEventListener('click', async () => {
+    // Gather input values
+    const price = document.getElementById('priceInput').value;
+    const occupation = document.getElementById('occupationInput').value;
+    const ticket = document.querySelector('input[name="ticket"]:checked')?.value;
+    const ticketTime = document.getElementById('ticket-time').value;
+
+    // Check if all required fields are available
+    if (price === '' || occupation === '' || !ticket) {
+        alert("Please fill in all the required fields.");
+        return;
+    }
+
+    // Constructing the data payload to send
+    const formData = {
+        rating: ratingValue,
+        price: Number(price),
+        occupation: Number(occupation),
+        ticket: ticket,
+        ticketTime: ticket === "yes" ? ticketTime : null
+    };
+
+    console.log("Form Data:", formData);
+
+    try {
+        // Send data to the backend
+        const response = await fetch("http://localhost:3000/submit", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log("Success:", result);
+            alert("Item added successfully!");
+        } else {
+            console.error("Failed to submit:", response.statusText);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});
+
+const back = document.querySelector(".back-button");
+back.addEventListener("click", () => {window.location.href = '../detail-page/index.html';});
