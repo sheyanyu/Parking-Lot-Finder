@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
             // parkingDiv.id = index;
             parkingDiv.addEventListener("click", (event) => {
 
+            const event = new CustomEvent('UserClickedOnList');
+            document.dispatchEvent(event);
+            console.log("create event");
+            console.log(event);
+
             if (event.target.closest(".parking-lot-info")) {
                 // const boardCastLocation = new URLSearchParams(parkingLot.location);
                 const query = `lat=${parkingLot.location.lat}&lng=${parkingLot.location.lng}&name=${parkingLot.name}&id=${parkingLot.place_id}&distance=${parkingLot.distance}&rate=${parkingLot.rating}$address=${parkingLot.address}`;
