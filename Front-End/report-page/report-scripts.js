@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
     const place_id = params.get("place_id");
     const name = params.get("name");
-    const address = params.get("address")
+    const address = params.get("address");
+    // const googleRate = params.get("rate");
+    // const distance = params.get("distance");
 
     function handleTicketChange() {
         if (yesTicketInput.checked) {
@@ -96,4 +98,4 @@ submitButton.addEventListener('click', async () => {
 });
 
 const back = document.querySelector(".back-button");
-back.addEventListener("click", () => {window.location.href = '../detail-page/index.html';});
+back.addEventListener("click", () => {window.location.href = `../detail-page/index.html?${params}`;});
