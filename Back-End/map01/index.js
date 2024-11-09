@@ -102,13 +102,14 @@ function createMap(center) {
     document.dispatchEvent(event);
   }
 
-  // Initialize search box
-  const input = document.createElement('div');
-  input.classList.add('search-bar');
-  input.innerHTML = `
-    <input id="pac-input" type="text" placeholder="Search for places...">
-    <button class="search-btn">🔍</button>
-  `;
+  // // Initialize search box
+  // const input = document.createElement('div');
+  // input.classList.add('search-bar');
+  // input.innerHTML = `
+  //   <input id="pac-input" type="text" placeholder="Search for places...">
+  //   <button class="search-btn">🔍</button>
+  // `;
+  input = document.getElementById("ni de search bar id")
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
   const searchBoxInput = input.querySelector('#pac-input');
