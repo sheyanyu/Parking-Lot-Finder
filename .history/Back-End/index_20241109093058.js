@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
+const express = require('express');
+const app = express();
+const port = 3000;
 
 const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://sylvia:4xs2pp1R6EVSd8k5@parkinglotfinder.jj5d2.mongodb.net/?retryWrites=true&w=majority&appName=ParkingLotFinder";
@@ -10,7 +13,11 @@ const database = client.db('parkingdb');
 const parking_lot = database.collection('parking_lot');
 const unvalidated = database.collection('invalid');
 
+<<<<<<< HEAD
 console.log(parking_lot.find().toArray())
+=======
+async function find() {
+>>>>>>> aa29009343d74eef02e43274151a8972ae26f7e9
 
 
 // async function find() {
