@@ -2,17 +2,23 @@
 //const query = `lat=${parkingLot.location.lat}&lng=${parkingLot.location.lng}&name=${parkingLot.name}
 // &id=${parkingLot.place_id}&distance=${parkingLot.distance}&rate=${parkingLot.rating}`;
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const place_id = params.get("id");
 const name = params.get("name");
 const googleRate = params.get("rate");
 const distance = params.get("distance");
+const address = params.get("address")
 //Access parking lot data from two database.
-document.addEventListener("DOMContentLoaded", async (id) => {
+document.addEventListener("DOMContentLoaded", async () => {
     console.log("Page loaded.");
-  
+    // const idSet = {id: placec_id}
     try {
       // Fetch data from the backend
-      const response = await fetch("http://localhost:3000/items");
+      const response = await fetch(`http://localhost:3000/items?id=${place_id}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
       
         if (response.ok) {
         const parkingLots = await response.json();
@@ -23,28 +29,8 @@ document.addEventListener("DOMContentLoaded", async (id) => {
     } catch (error) {
         console.error("Error fetching parking lot data:", error);
       }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log(111111111111);
-
-    // loadNewGoogleMapsScript();
-
-    const title = document.getElementById("title");
-    title.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
-
-    const update = document.getElementById("update");
-    update.addEventListener("click", () => {window.location.href = '../report-page/index.html';});
-
-    const back = document.getElementById("back");
-    back.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
-
-
-
-
-
-
-//Creating Parking Lot detail block
+    //Creating Parking Lot detail block
     const detailContainer = document.querySelector(".parking-card");
 
     const lotName = document.createElement('h1');
@@ -140,20 +126,25 @@ document.addEventListener("DOMContentLoaded", () => {
     detailContainer.appendChild(lotRisk);
     detailContainer.appendChild(chartDiv1);
     detailContainer.appendChild(chartDiv2);
-    // detailContainer
-    // <h1>1. Parking lot A</h1>
-    // <p class="distance">&lt;34m</p>
-    // <p>Address: 9 Flintlock Ln, Amherst, MA 01002</p>
-    // <p>Availability: 20%</p>
-    // <p>Google Rate: <span class="rating">⭐⭐⭐</span></p>
-    // <p>Price: $25/hour &nbsp;&nbsp;&nbsp; $100/Day</p>
-    // <p>Risk: Low</p>
+});
 
-    // <div class="chart">
-    //     <img src="曲线图.jpg" alt="Availability graph" style="width: 100%; height: auto;">
-    // </div>
-    // <div class="chart">
-    //   <img src="曲线图.jpg" alt="Availability graph" style="width: 100%; height: auto;">
-    // </div>
+document.addEventListener("DOMContentLoaded", () => {
+    console.log(111111111111);
+
+    // loadNewGoogleMapsScript();
+
+    const title = document.getElementById("title");
+    title.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
+
+    const update = document.getElementById("update");
+    update.addEventListener("click", () => {window.location.href = '../report-page/index.html';});
+
+    const back = document.getElementById("back");
+    back.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
+
+
+
+
+
 
 });

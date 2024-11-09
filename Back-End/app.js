@@ -56,15 +56,15 @@ app.post('/submit', async (req, res) => {
   }
 });
 
-app.get('/items', async (req, res) => {
-  try {
-    const items = await parking_lot.find().toArray();
-    res.json(items);
-  } catch (error) {
-    console.error("Error retrieving items:", error);
-    res.status(500).json({ message: "Error retrieving items" });
-  }
-});
+// app.get('/items', async (req, res) => {
+//   try {
+//     const items = await parking_lot.find().toArray();
+//     res.json(items);
+//   } catch (error) {
+//     console.error("Error retrieving items:", error);
+//     res.status(500).json({ message: "Error retrieving items" });
+//   }
+// });
 
 // Function to fetch data from the parking_lot collection by location ID
 async function getData(id) {
