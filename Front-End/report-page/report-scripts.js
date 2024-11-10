@@ -6,14 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
     ticketTimeContainer.style.display = "none";
 
     const params = new URLSearchParams(window.location.search);
-    const place_id = params.get("place_id");
+    const place_id = params.get("id");
     const name = params.get("name");
     const address = params.get("address");
+
     // const googleRate = params.get("rate");
     // const distance = params.get("distance");
 
     console.log(name);
     console.log(address);
+    console.log(place_id);
 
     const detailsContainer = document.getElementById("details-container");
     detailsContainer.innerHTML = '';
@@ -80,15 +82,19 @@ submitButton.addEventListener('click', async () => {
     const occupation = document.getElementById('occupationInput').value;
     const ticket = document.querySelector('input[name="ticket"]:checked')?.value;
     const ticketTime = document.getElementById('ticket-time').value;
+    const place_id = params.get("id");
+
 
     // Check if all required fields are available
     if (price === '' || occupation === '' || !ticket) {
         alert("Please fill in all the required fields.");
         return;
     }
+    
 
     // Constructing the data payload to send
     const formData = {
+        location_id: place_id,
         rating: ratingValue,
         price: Number(price),
         occupation: Number(occupation),
