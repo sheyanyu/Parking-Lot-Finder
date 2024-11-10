@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Create the image element
     const imgElement1 = document.createElement('img');
-    imgElement1.src = '曲线图.jpg';
+    imgElement1.src = 'occupation_prediction.png';
     imgElement1.alt = 'Availability graph';
     imgElement1.style.width = '100%';
     imgElement1.style.height = 'auto';
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Create the image element
     const imgElement2 = document.createElement('img');
-    imgElement2.src = '曲线图.jpg';
+    imgElement2.src = 'ticket_prediction.png';
     imgElement2.alt = 'Availability graph';
     imgElement2.style.width = '100%';
     imgElement2.style.height = 'auto';
