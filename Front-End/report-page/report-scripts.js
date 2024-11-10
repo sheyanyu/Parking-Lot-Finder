@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     yesTicketInput.addEventListener("change", handleTicketChange);
     noTicketInput.addEventListener("change", handleTicketChange);
 
-    const title = document.querySelector(".webLogo");
+    const title = document.querySelector(".logo");
     title.addEventListener("click", () => {window.location.href = `../main-page/index.html?${params}`;});
 
 });

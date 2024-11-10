@@ -10,12 +10,13 @@ header {
     width: 100%-30px;
     max-width: 600px;
     /* margin: 0 auto; */
-    padding: 15px;
+    /* padding: 15px; */
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     text-align: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    justify-content: center;
 }
 
 header h1 {
@@ -26,6 +27,12 @@ header h1 {
     color: #06517A;
     cursor: pointer;
     
+}
+.logo{
+    width: 300px;
+    height: auto;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .search-bar {
@@ -65,6 +72,7 @@ header h1 {
     margin-bottom: 20px;
     position: relative;
     z-index: 200;
+    justify-content: center;
 }
 
 .map img {
@@ -78,10 +86,12 @@ header h1 {
 
 .background-color{
     width: 100%;
+    max-width: 600px;
     margin-top: -80px;
     background-color: #E1EBF0;
     position: absolute;
     z-index: 1;
+    justify-content: center;
 }
 
 .parking-list {
@@ -97,6 +107,7 @@ header h1 {
     padding: 10px 0;
     border-radius: 10px;
     overflow-y: auto;
+    justify-content: center;
 }
 
 .parking-lot-info {

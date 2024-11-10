@@ -32,7 +32,8 @@ body{
     font-size: 2em;
     margin-top: 20px;
     margin-bottom: 20px;
-
+    align-items: center;
+    text-align: center;
 }
 
 .bottom{

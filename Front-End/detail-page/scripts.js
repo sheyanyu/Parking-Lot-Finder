@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // loadNewGoogleMapsScript();
 
-    const title = document.getElementById("title");
+    const title = document.querySelector(".logo");
     title.addEventListener("click", () => {window.location.href = '../main-page/index.html';});
 
     const update = document.getElementById("update");
