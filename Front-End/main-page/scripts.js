@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const parkingList = event.detail;
         let monGoParkingLots = null;
-        // const index = 0;
+        let index = 1;
 
         // Create div elements for each parking lot in the returned list
         parkingList.forEach(async (parkingLot) => {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
             const lotName = document.createElement('p');
-            lotName.textContent = parkingLot.name;
+            lotName.textContent = `${index}. ${parkingLot.name}`;
             lotName.classList.add('parking-lot-name');
 
             const lotDistance = document.createElement('span');
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             parkingDiv.appendChild(lotInfo);
 
             parkingListContainer.appendChild(parkingDiv);
-            // index++;
+            index++;
         });
 
         
