@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             else {
                 price = monGoParkingLots[0]['price'] + "/hr";
             }
-            const infoContent = `Availability: ${occ}    Price: $${price}/hr`;
+            const infoContent = `Availability: ${occ}    Price: $${price}`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 
