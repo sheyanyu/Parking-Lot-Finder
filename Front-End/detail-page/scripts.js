@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
       
         if (response.ok) {
-        parkingLots = await response.json();
+            parkingLots = await response.json();
         // console.log("Fetched Parking Lots:", parkingLots);
         // console.log("Fetched Parking Lots Type:", parkingLots[0]);
         // console.log("Fetched Parking LotsPrice:", parkingLots[0]['price']);
@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     let availabilityPersent;
     let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    // if (parkingLots[0] === null) {
+    if (parkingLots[0]['occupation'][0] === null) {
         parkingLotAvailability = `Availability: None`;
-//     } else {
-//         availabilityPersent = parkingLots[0].availability;
-//         parkingLotAvailability = `Availability: ${availabilityPersent}%`;
-// }
+    } else {
+        availabilityPersent = parkingLots[0]['occupation'][0];
+        parkingLotAvailability = `Availability: ${availabilityPersent}%`;
+}
     lotAvailability.textContent = parkingLotAvailability;
     // lotInfo.classList.add('parking-lot-name');
 
