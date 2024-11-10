@@ -4,8 +4,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    position: relative;
     display: flex;
+    position: relative;
     align-items: center;
 }
 /* body {
@@ -14,6 +14,8 @@ body {
     padding: 0;
     background-color: #ffffff;
 } */
+
+
 
 .container {
     width: 100%;
@@ -28,7 +30,7 @@ header {
     /* margin: 0 auto; */
     /* padding: 15px; */
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
     text-align: center;
     /* margin-bottom: 10px; */
@@ -38,6 +40,7 @@ header {
 .logo{
     width: 300px;
     height: auto;
+    border-radius: 51%;
 }
 
 header h1 {
@@ -130,13 +133,18 @@ header h1 {
     padding: 0 15px;
     /* margin-bottom: 10px; */
     /* border-radius: 10px; */
-    font-family: 'Inter', 'Courier New', Courier, monospace;
     cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s ease-in-out;
+}
+
+.parking-lot-info:hover {
+    background-color: #E9E9E9;
+    transform: scale(1.02);
 }
 
 .parking-lot-name {
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.4em;
     color: #34495e;
 }
 
