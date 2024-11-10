@@ -122,6 +122,10 @@ submitButton.addEventListener('click', async () => {
     } catch (error) {
         console.error("Error:", error);
     }
+
+    const title = document.querySelector(".webLogo");
+    title.addEventListener("click", () => {window.location.href = `../main-page/index.html?${params}`;});
+
 });
 
 const back = document.querySelector(".back-button");

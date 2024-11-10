@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   headers: {
                       "Content-Type": "application/json"
                   }
-              });
+                });
                 
                   if (response.ok) {
                   monGoParkingLots =  response.json();
