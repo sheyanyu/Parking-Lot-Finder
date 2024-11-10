@@ -40,7 +40,6 @@ client.connect()
         try {
             const data = await get_valid_Data(id); // Fetch data by location
             res.json(data); // Return the data as JSON response
-            console.log(data);
         } catch (error) {
             res.status(500).send("Error fetching data");
         }
@@ -48,9 +47,7 @@ client.connect()
 
   // Function to fetch data from the parking_lot collection by location ID
     async function get_valid_Data(id) {
-        
       try {
-        
           // Query the parking_lot collection using the location (or _id) filter
           const data = await parking_lot.find({ location_id: id }).toArray();
           return data;
@@ -75,52 +72,52 @@ client.connect()
         try {
             // Destructure data from the request body
             const { location_id,
-                    time,
                     rating,
                     price,
                     occupation,
                     ticket,
                     ticketTime
                 } = req.body;
-
+            const time = new Date()
             // Log received data
             console.log('Received data:', location_id, time, rating, price, occupation, ticket, ticketTime);
+            
             const result = {
-                'location_id': "ChIJW4qs73XS5okRwAauJFY7j1E",
+                'location_id': location_id,
                 'time': time,
                 'rating': Number(rating),
                 'price': Number(price),
                 'occupation': Number(occupation),
-                'ticket': ticket
+                'ticket': ticket === 'yes' ? ticket = ticketTime : ticket
             }
           await unvalidated.insertOne(result);
 
           let count = 0
-          const invalid = await get_awaiting_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
+          const invalid = await get_awaiting_Data(location_id);
           // console.log("Invalid", invalid)
           for (let i in invalid){
-            console.log("invalid obj", invalid[i])
+            
               if (Number(invalid[i]['price'])===Number(price)){
                   count+=1
               }
           };
     
     const valid_location = await get_valid_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
-    
-    console.log("count", count)
-    // console.log("valid", valid_location[0]["location_id"])
-    // console.log("invalid first", invalid[0]['location_id'])
-    if (count>=5 ){
+    console.log( location_id, valid_location[0]["location_id"])
+
+    if (count>=5&& price !== valid_location[0]['price'] ){
         const aaa = await parking_lot.updateOne(
-            { location_id: "ChIJW4qs73XS5okRwAauJFY7j1E" },
+            { location_id: location_id },
             { $set: { price: Number(price) } }
         );
         
-    }else if (location_id === valid_location[0]["location_id"]
-         && price === valid_location[0]['price']){
-          console.log("reached")
+    }else if (
+      location_id === valid_location[0]["location_id"]&&
+       price === valid_location[0]['price']){
+          
+        console.log("jyfkf");
         // update valid input
-        await parking_lot.updateOne(
+        const bbb = await parking_lot.updateOne(
             { location_id: location_id },
             {
                 $push: {
@@ -132,6 +129,8 @@ client.connect()
                 }
             }
         );
+        console.log("4rufu");
+        
     }
     
         
