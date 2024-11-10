@@ -38,6 +38,25 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(22222222);
             });
 
+            //get datafrom mongoDB
+            try {
+                // Fetch data from the backend
+                const response = fetch(`http://localhost:3000/items?id=${parkingLot.place_id}`, {
+                  method: 'GET',
+                  headers: {
+                      "Content-Type": "application/json"
+                  }
+              });
+                
+                  if (response.ok) {
+                  monGoParkingLots =  response.json();
+                  } else {
+                  console.error("Failed to fetch parking lots:", response.statusText);
+                  }
+              } catch (error) {
+                  console.error("Error fetching parking lot data:", error);
+                }
+
             const lotName = document.createElement('p');
             lotName.textContent = parkingLot.name;
             lotName.classList.add('parking-lot-name');
@@ -48,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
             lotDistance.classList.add('distance');
 
             const lotInfo = document.createElement('p');
-            
-            const infoContent = `Availability: 20%    Price: $25/hr`;
+
+            const infoContent = `Availability: ${monGoParkingLots[0][occupation][0]}%    Price: $${monGoParkingLots[0][price]}/hr`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 
