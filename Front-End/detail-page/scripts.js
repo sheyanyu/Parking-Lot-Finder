@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (response.ok) {
         parkingLots = await response.json();
         console.log("Fetched Parking Lots:", parkingLots);
+        console.log("Fetched Parking LotsPrice:", parkingLots["price"]);
         } else {
         console.error("Failed to fetch parking lots:", response.statusText);
         }
@@ -55,12 +56,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     let availabilityPersent;
     let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    if (parkingLots === null) {
+    // if (parkingLots === null) {
         parkingLotAvailability = `Availability: None`;
-    } else {
-        availabilityPersent = parkingLots.availability;
-        parkingLotAvailability = `Availability: ${availabilityPersent}%`;
-}
+//     } else {
+//         availabilityPersent = parkingLots[0].availability;
+//         parkingLotAvailability = `Availability: ${availabilityPersent}%`;
+// }
     lotAvailability.textContent = parkingLotAvailability;
     // lotInfo.classList.add('parking-lot-name');
 
@@ -68,13 +69,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const starSpan = document.createElement('span');
         let rate;
-        if (typeof parkingLots !== 'undefined') {
-            if(parkingLots.rate != null) {rate = parkingLots.rate;}
-            else if (googleRate != null) {rate = googleRate;}
+        if (parkingLots === null) {
+            if(parkingLots.rate !== null) {rate = parkingLots[0].rate;}
+            else if (googleRate !== null) {rate = googleRate;}
             else {rate = 0; starSpan.innerHTML += "None";}
         } else {
 
-            if (googleRate != null) {rate = googleRate;}
+            if (googleRate !== null) {rate = googleRate;}
             else {rate = 0; starSpan.innerHTML += "None";}
         }
         for (let i = rate; i>0; i--) {
@@ -89,14 +90,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     const lotPrice = document.createElement('p');
-    let price;
-    let parkingLotPrice;
+    var price;
+    var parkingLotPrice;
     // if (typeof parkingLots === 'undefined') {
         if (parkingLots === null) {
 
         parkingLotPrice = "Price: None";
     } else {
-        price = parkingLots[0]['price'];
+        price = parkingLots["price"];
         parkingLotPrice = `Price: $${price}/hour`;
     }
      

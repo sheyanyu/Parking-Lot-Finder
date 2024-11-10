@@ -1,5 +1,5 @@
 // import { getData } from "../app";
-import { exec } from "child_process"; 
+// import { exec } from "child_process"; 
 let data;
 const params = new URLSearchParams(window.location.search);
 const place_id = params.get("id");
