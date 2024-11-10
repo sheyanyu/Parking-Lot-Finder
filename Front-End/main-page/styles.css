@@ -1,31 +1,43 @@
 body {
+    max-width: 600px;
     font-family: 'Playfair Display', serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
     position: relative;
+    display: flex;
+    align-items: center;
 }
-
-/* .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+/* body {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 0;
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
 } */
 
+.container {
+    width: 100%;
+    max-width: 600px; /* 限制最大宽度 */
+
+    box-sizing: border-box; /* 包括内边距在宽度内 */
+}
+
 header {
-    width: 100%-30px;
+    width: calc(100%-30px);
     max-width: 600px;
     /* margin: 0 auto; */
-    padding: 15px;
+    /* padding: 15px; */
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     text-align: center;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     justify-content: center;
+}
+
+.logo{
+    width: 300px;
+    height: auto;
 }
 
 header h1 {
@@ -89,7 +101,8 @@ header h1 {
 .background-color{
     width: 100%;
     margin-top: -130px;
-    background-color: #E1EBF0;
+    /* background-color: #E1EBF0; */
+    background-color: #c0d9e5;
     position: absolute;
     z-index: 1;
     justify-content: center;

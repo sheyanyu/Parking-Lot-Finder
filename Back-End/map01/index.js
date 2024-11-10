@@ -39,7 +39,7 @@ function initMap() {
 
 function createMap(center) {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 13,
+    zoom: 12,
     center: center,
     mapId: 'da37f3254c6a6d1c',
     mapTypeControl: false,
@@ -104,7 +104,9 @@ function createMap(center) {
 
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        results.forEach((place) => {
+        const limitLoc = results.slice(0,6);
+        let index = 1;
+        limitLoc.forEach((place) => {
           console.log(place.vicinity);
           if (place.geometry && place.geometry.location) {
             distance = calculate_distance(locations[0].location, place.geometry.location);
@@ -126,12 +128,20 @@ function createMap(center) {
             address: place.vicinity || 'no address available',
           });
 
+          const customIcon = {
+            url: `./marker${index}.png`, // 自定义图标的 URL
+            scaledSize: new google.maps.Size(40, 40), // 设定与谷歌默认 marker 相似的尺寸 (40px 高)
+            anchor: new google.maps.Point(20, 40), // 设置锚点，通常为图标底部中心
+          };
+
           const marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
             title: place.name,
+            icon: customIcon,
           });
           parkingMarkers.push(marker);
+          index++;
         });
 
         emitParkingList();
