@@ -215,10 +215,13 @@ document.head.insertAdjacentHTML('beforeend', `
     .search-bar {
       display: flex;
       align-items: center;
+      width: 100%; /* Adjusts the overall container width to take full space */
+      padding: 10px; /* Adds padding to the search bar container */
+      box-sizing: border-box; /* Includes padding in the total width */
     }
     .search-bar input {
-      width: 80%;
-      padding: 10px;
+      flex: 1; /* Makes input take up all available space */
+      padding: 15px;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 20px;
@@ -234,3 +237,5 @@ document.head.insertAdjacentHTML('beforeend', `
     }
   </style>
 `);
+
+
