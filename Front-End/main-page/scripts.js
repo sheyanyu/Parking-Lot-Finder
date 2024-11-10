@@ -84,7 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
             else {
                 occ = monGoParkingLots[0]['occupation'][0] + "%";
             }
-            const infoContent = `Availability: ${occ}    Price: $${monGoParkingLots[0]['price']}/hr`;
+            let price = null;
+            if(monGoParkingLots[0]['price'] === null) {
+                price = "None";
+            }
+            else {
+                price = monGoParkingLots[0]['price'] + "/hr";
+            }
+            const infoContent = `Availability: ${occ}    Price: $${price}/hr`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 

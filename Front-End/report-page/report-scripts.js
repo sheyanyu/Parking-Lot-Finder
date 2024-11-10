@@ -45,6 +45,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     yesTicketInput.addEventListener("change", handleTicketChange);
     noTicketInput.addEventListener("change", handleTicketChange);
+
+    const title = document.querySelector(".webLogo");
+    title.addEventListener("click", () => {window.location.href = `../main-page/index.html?${params}`;});
+
 });
 
 const stars = document.querySelectorAll('#starRating .fa-star');
@@ -123,8 +127,7 @@ submitButton.addEventListener('click', async () => {
         console.error("Error:", error);
     }
 
-    const title = document.querySelector(".webLogo");
-    title.addEventListener("click", () => {window.location.href = `../main-page/index.html?${params}`;});
+
 
 });
 
