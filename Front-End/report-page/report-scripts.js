@@ -46,8 +46,35 @@ document.addEventListener("DOMContentLoaded", function () {
     yesTicketInput.addEventListener("change", handleTicketChange);
     noTicketInput.addEventListener("change", handleTicketChange);
 
+
+    const occupationInput = document.getElementById("occupationInput");
+
+    occupationInput.addEventListener("input", function() {
+        // Ensure value is within 0-100
+        if (this.value < 0) {
+            this.value = 0;
+        } else if (this.value > 100) {
+            this.value = 100;
+        }
+    });
+
+
+    const priceInput = document.getElementById("priceInput");
+
+    priceInput.addEventListener("input", function() {
+        if (this.value < 0) {
+            this.value = 0;
+        } 
+    });
+    
     const title = document.querySelector(".logo");
     title.addEventListener("click", () => {window.location.href = `../main-page/index.html?${params}`;});
+
+
+
+
+
+
 
 });
 

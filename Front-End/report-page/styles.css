@@ -51,6 +51,7 @@ body {
     gap: 15px;
     height: 120px;
     margin-bottom: 30px;
+    max-height: 120px;
 }
 
 .details{
@@ -59,14 +60,14 @@ body {
 }
 
 .parking-lot-name{
-    font-size: 2em;
+    font-size: 1.8em;
     margin-top:5px;
     margin-bottom:5px;
 }
 
 .address{
     color: #8a8a8a;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .question{
