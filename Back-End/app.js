@@ -82,14 +82,19 @@ client.connect()
             const time = new Date()
             // Log received data
             console.log('Received data:', location_id, time, rating, price, occupation, ticket, ticketTime);
-            
+            let x;
+            if (ticket === 'yes') {
+              x = ticketTime;
+            } else {
+              x = ticket;
+            }
             const result = {
                 'location_id': location_id,
                 'time': time,
                 'rating': Number(rating),
                 'price': Number(price),
                 'occupation': Number(occupation),
-                'ticket': ticket === 'yes' ? ticket = ticketTime : ticket
+                'ticket': x
             }
           await unvalidated.insertOne(result);
 
@@ -115,8 +120,7 @@ client.connect()
     }else if (
       location_id === valid_location[0]["location_id"]&&
        price === valid_location[0]['price']){
-          
-        console.log("jyfkf");
+    
         // update valid input
         const bbb = await parking_lot.updateOne(
             { location_id: location_id },
@@ -124,13 +128,11 @@ client.connect()
                 $push: {
                     time: time,
                     rating: Number(rating),
-                    price: Number(price),
                     occupation: Number(occupation),
                     ticket: ticket
                 }
             }
         );
-        console.log("4rufu");
         
     }
     
