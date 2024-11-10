@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // Add an event listener to update the parking list when data is ready
-    document.addEventListener("parkingListUpdated", (event) => {
+    document.addEventListener("parkingListUpdated",  (event) => {
         console.log('333');
         const parkingListContainer = document.getElementById("parking-list");
         parkingListContainer.innerHTML = ""; // Clear existing content
     
         const parkingList = event.detail;
-        let monGoParkingLots;
-        // const index = 0;
+        let monGoParkingLots = null;
+        let index = 1;
 
         // Create div elements for each parking lot in the returned list
-        parkingList.forEach((parkingLot) => {
+        parkingList.forEach(async (parkingLot) => {
             const parkingDiv = document.createElement("div");
             parkingDiv.classList.add("parking-lot-info");
             // parkingDiv.id = index;
@@ -41,18 +41,30 @@ document.addEventListener("DOMContentLoaded", () => {
             //get datafrom mongoDB
             try {
                 // Fetch data from the backend
-                const response = fetch(`http://localhost:3000/items?id=${parkingLot.place_id}`, {
+                console.log('FROM MAIN PLACE_ID')
+                console.log(parkingLot.place_id);
+                const response = await fetch(`http://localhost:3000/items?id=${parkingLot.place_id}`, {
                   method: 'GET',
                   headers: {
                       "Content-Type": "application/json"
                   }
-              });
+                });
                 
                   if (response.ok) {
-                  monGoParkingLots =  response.json();
-                  
+                  monGoParkingLots = await response.json();
+                  if (monGoParkingLots.length === 0){
+                    monGoParkingLots = [{
+                        'location_id': place_id,
+                        'rating': null,
+                        'price': null,
+                        'occupation': [null],
+                        'ticket': null
+                      }];
+                }
+                  console.log('FROM MAIN');
                   console.log(monGoParkingLots);
                   } else {
+                    console.log("RESPONSE NOT OK")
                 //   console.error("Failed to fetch parking lots:", response.statusText);
                     monGoParkingLots = [{
                         'location_id': parkingLot.place_id,
@@ -64,11 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
                       console.log(monGoParkingLots);
                   }
               } catch (error) {
-                  console.error("Error fetching parking lot data:", error);
+                //   console.error("Error fetching parking lot data:", error);
                 }
 
             const lotName = document.createElement('p');
-            lotName.textContent = parkingLot.name;
+            lotName.textContent = `${index}. ${parkingLot.name}`;
             lotName.classList.add('parking-lot-name');
 
             const lotDistance = document.createElement('span');
@@ -77,14 +89,22 @@ document.addEventListener("DOMContentLoaded", () => {
             lotDistance.classList.add('distance');
 
             const lotInfo = document.createElement('p');
-            let occ = null;
+            let occ;
             if(monGoParkingLots[0]['occupation'][0] === null) {
+                console.log('null occ')
                 occ = "None";
             }
             else {
                 occ = monGoParkingLots[0]['occupation'][0] + "%";
             }
-            const infoContent = `Availability: ${occ}    Price: $${monGoParkingLots[0]['price']}/hr`;
+            let price;
+            if(monGoParkingLots[0]['price'] === null) {
+                price = "None";
+            }
+            else {
+                price = monGoParkingLots[0]['price'] + "/hr";
+            }
+            const infoContent = `Availability: ${occ}    Price: $${price}/hr`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 
@@ -93,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             parkingDiv.appendChild(lotInfo);
 
             parkingListContainer.appendChild(parkingDiv);
-            // index++;
+            index++;
         });
 
         

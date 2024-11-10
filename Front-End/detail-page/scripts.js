@@ -24,15 +24,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
       
         if (response.ok) {
-        parkingLots = await response.json();
-        // console.log("Fetched Parking Lots:", parkingLots[0]);
-        // console.log("Fetched Parking Lots Type:", typeof(parkingLots));
-        // console.log("Fetched Parking LotsPrice:", parkingLots[0]["price"]);
+            parkingLots = await response.json();
+        // console.log("Fetched Parking Lots:", parkingLots);
+        // console.log("Fetched Parking Lots Type:", parkingLots[0]);
+        // console.log("Fetched Parking LotsPrice:", parkingLots[0]['price']);
+            if (parkingLots.length === 0){
+                parkingLots = [{
+                    'location_id': place_id,
+                    'rating': null,
+                    'price': null,
+                    'occupation': [null],
+                    'ticket': null
+                  }];
+            }
         } else {
-        console.error("Failed to fetch parking lots:", response.statusText);
+        // console.error("Failed to fetch parking lots:", response.statusText);
+        parkingLots = [{
+            'location_id': place_id,
+            'rating': null,
+            'price': null,
+            'occupation': [null],
+            'ticket': null
+          }];
+          console.log(monGoParkingLots);
         }
     } catch (error) {
-        console.error("Error fetching parking lot data:", error);
+        // console.error("Error fetching parking lot data:", error);
     }
 
     //Creating Parking Lot detail block
@@ -57,12 +74,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     let availabilityPersent;
     let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    // if (parkingLots[0] === null) {
+    if (parkingLots[0]['occupation'][0] === null) {
         parkingLotAvailability = `Availability: None`;
-//     } else {
-//         availabilityPersent = parkingLots[0].availability;
-//         parkingLotAvailability = `Availability: ${availabilityPersent}%`;
-// }
+    } else {
+        availabilityPersent = parkingLots[0]['occupation'][0];
+        parkingLotAvailability = `Availability: ${availabilityPersent}%`;
+}
     lotAvailability.textContent = parkingLotAvailability;
     // lotInfo.classList.add('parking-lot-name');
 
@@ -94,10 +111,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     var price;
     var parkingLotPrice;
     // if (typeof parkingLots === 'undefined') {
-    if (parkingLots[0] === null) {
+    if (parkingLots[0]['price'] === null) {
         parkingLotPrice = "Price: None";
     } else {
-        price = parkingLots[0]["price"]
+        price = parkingLots[0]['price']
         parkingLotPrice = `Price: $${price}/hour`;
     }
      
@@ -115,7 +132,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Create the image element
     const imgElement1 = document.createElement('img');
-    imgElement1.src = '曲线图.jpg';
+    imgElement1.src = 'occupation_prediction.png';
     imgElement1.alt = 'Availability graph';
     imgElement1.style.width = '100%';
     imgElement1.style.height = 'auto';
@@ -129,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Create the image element
     const imgElement2 = document.createElement('img');
-    imgElement2.src = '曲线图.jpg';
+    imgElement2.src = 'ticket_prediction.png';
     imgElement2.alt = 'Availability graph';
     imgElement2.style.width = '100%';
     imgElement2.style.height = 'auto';

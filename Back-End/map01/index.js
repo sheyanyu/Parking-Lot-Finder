@@ -156,7 +156,7 @@ function createMap(center) {
     <input id="pac-input" type="text" placeholder="Search for places...">
     <button class="search-btn">🔍</button>
   `;
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
   const searchBoxInput = input.querySelector('#pac-input');
   const searchBox = new google.maps.places.SearchBox(searchBoxInput);
@@ -215,10 +215,15 @@ document.head.insertAdjacentHTML('beforeend', `
     .search-bar {
       display: flex;
       align-items: center;
+      justify-content: center;
+      width: 65%; /* Adjusts the overall container width to take full space */
+      padding: 10px; /* Adds padding to the search bar container */
+      box-sizing: border-box; /* Includes padding in the total width */
+
     }
     .search-bar input {
-      width: 80%;
-      padding: 10px;
+      flex: 1; /* Makes input take up all available space */
+      padding: 15px;
       font-size: 1em;
       border: 1px solid #ccc;
       border-radius: 20px;
@@ -234,3 +239,5 @@ document.head.insertAdjacentHTML('beforeend', `
     }
   </style>
 `);
+
+

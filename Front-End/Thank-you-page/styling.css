@@ -1,0 +1,53 @@
+body{
+    background-color: #d5d9f3;
+    width: auto;
+    font-family:'Abhaya Libre';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    padding: 50px 20px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+
+.fas{
+    background-color: rgb(82, 179, 82);
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 60px;
+}
+
+.congratulation-contents-title{
+    font-size: 2em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.bottom{
+    padding: 7px;
+    border-radius: 10px;
+    background-color:#dadcec;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
+.congratulation-contents-para{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+

@@ -24,7 +24,7 @@ body {
     font-size: 2em;
     color:#2b3185;
     font-family:'Baskerville','Inter', Courier, monospace;
-
+    cursor: pointer;
 }
 
 .rating-container {
