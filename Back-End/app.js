@@ -76,7 +76,7 @@ client.connect()
             throw error;
           }
       }
-
+      
     // POST route to handle form data
     app.post('/submit', async (req, res) => {
         try {
@@ -157,5 +157,6 @@ client.connect()
 
 module.exports = {
     get_valid_Data,
-    get_awaiting_Data
+    get_awaiting_Data,
+  
 };
