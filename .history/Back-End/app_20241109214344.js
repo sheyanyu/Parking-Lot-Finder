@@ -58,7 +58,7 @@ client.connect()
               'price': null,
               'occupation': null,
               'ticket': null
-            }]
+            }
           }
           return data;
         } catch (error) {

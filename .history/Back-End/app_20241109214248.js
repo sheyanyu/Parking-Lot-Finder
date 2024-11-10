@@ -52,13 +52,14 @@ client.connect()
           // Query the parking_lot collection using the location (or _id) filter
           const data = await parking_lot.find({ location_id: id }).toArray();
           if (data.length===0){
-            return [{
+            return {
               'location_id': id,
               'rating': null,
               'price': null,
               'occupation': null,
-              'ticket': null
-            }]
+              'ticket':
+
+            }
           }
           return data;
         } catch (error) {

@@ -46,26 +46,17 @@ client.connect()
     });
 
   // Function to fetch data from the parking_lot collection by location ID
-    async function get_valid_Data(id) {
+    [async function get_valid_Data(id) {
       try {
     
           // Query the parking_lot collection using the location (or _id) filter
           const data = await parking_lot.find({ location_id: id }).toArray();
-          if (data.length===0){
-            return [{
-              'location_id': id,
-              'rating': null,
-              'price': null,
-              'occupation': null,
-              'ticket': null
-            }]
-          }
           return data;
         } catch (error) {
           console.error('Error fetching data:', error);
           throw error;
         }
-    }
+    }]
     async function get_awaiting_Data(id) {
         try {
             // Query the parking_lot collection using the location (or _id) filter
