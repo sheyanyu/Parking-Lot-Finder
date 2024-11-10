@@ -97,7 +97,7 @@ client.connect()
                 } = req.body;
             const time = new Date()
             // Log received data
-            // console.log('Received data:', location_id, time, rating, price, occupation, ticket, ticketTime);
+            console.log('Received data:', location_id, time, rating, price, occupation, ticket, ticketTime);
             let x;
             if (ticket === 'yes') {
               x = ticketTime;
