@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     } catch (error) {
         console.error("Error fetching parking lot data:", error);
-      }
+    }
 
     //Creating Parking Lot detail block
     const detailContainer = document.querySelector(".parking-card");

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ticketTimeContainer.style.display = "none";
 
     const params = new URLSearchParams(window.location.search);
-    const place_id = params.get("id");
     const name = params.get("name");
     const address = params.get("address");
 
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log(name);
     console.log(address);
-    console.log(place_id);
 
     const detailsContainer = document.getElementById("details-container");
     detailsContainer.innerHTML = '';
