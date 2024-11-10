@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         parkingListContainer.innerHTML = ""; // Clear existing content
     
         const parkingList = event.detail;
-
+        let monGoParkingLots;
         // const index = 0;
 
         // Create div elements for each parking lot in the returned list
@@ -50,8 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                   if (response.ok) {
                   monGoParkingLots =  response.json();
+                  
+                  console.log(monGoParkingLots);
                   } else {
-                  console.error("Failed to fetch parking lots:", response.statusText);
+                //   console.error("Failed to fetch parking lots:", response.statusText);
+                    monGoParkingLots = [{
+                        'location_id': parkingLot.place_id,
+                        'rating': null,
+                        'price': null,
+                        'occupation': [null],
+                        'ticket': null
+                      }];
+                      console.log(monGoParkingLots);
                   }
               } catch (error) {
                   console.error("Error fetching parking lot data:", error);
@@ -67,8 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
             lotDistance.classList.add('distance');
 
             const lotInfo = document.createElement('p');
-
-            const infoContent = `Availability: ${monGoParkingLots[0][occupation][0]}%    Price: $${monGoParkingLots[0][price]}/hr`;
+            let occ = null;
+            if(monGoParkingLots[0]['occupation'][0] === null) {
+                occ = "None";
+            }
+            else {
+                occ = monGoParkingLots[0]['occupation'][0] + "%";
+            }
+            const infoContent = `Availability: ${occ}    Price: $${monGoParkingLots[0]['price']}/hr`;
             lotInfo.textContent = infoContent;
             // lotInfo.classList.add('parking-lot-name');
 
