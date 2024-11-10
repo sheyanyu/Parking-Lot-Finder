@@ -124,14 +124,28 @@ client.connect()
               }
           };
     
-    const valid_location = await get_valid_Data("ChIJW4qs73XS5okRwAauJFY7j1E");
+    const valid_location = await get_valid_Data(location_id);
     console.log( location_id, valid_location[0]["location_id"])
 
-    if (count>=5&& price !== valid_location[0]['price'] ){
-        const aaa = await parking_lot.updateOne(
+    if (count>=5){
+        if(price !== valid_location[0]['price']){
+          const aaa = await parking_lot.updateOne(
             { location_id: location_id },
             { $set: { price: Number(price) } }
         );
+        }
+        if (valid_location.length ===0){
+          const newloc = {
+            'location_id': location_id,
+            'time': [],
+            'rating': [],
+            'price': Number(price),
+            'occupation': [],
+            'ticket': []
+        }
+          parking_lot.insertOne(newloc)
+        }
+       
         
     }else if (
       location_id === valid_location[0]["location_id"]&&
