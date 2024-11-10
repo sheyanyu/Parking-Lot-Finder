@@ -25,8 +25,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       
         if (response.ok) {
         parkingLots = await response.json();
-        console.log("Fetched Parking Lots:", parkingLots);
-        console.log("Fetched Parking LotsPrice:", parkingLots["price"]);
+        // console.log("Fetched Parking Lots:", parkingLots[0]);
+        // console.log("Fetched Parking Lots Type:", typeof(parkingLots));
+        // console.log("Fetched Parking LotsPrice:", parkingLots[0]["price"]);
         } else {
         console.error("Failed to fetch parking lots:", response.statusText);
         }
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let availabilityPersent;
     let parkingLotAvailability;
     const lotAvailability = document.createElement('p');
-    // if (parkingLots === null) {
+    // if (parkingLots[0] === null) {
         parkingLotAvailability = `Availability: None`;
 //     } else {
 //         availabilityPersent = parkingLots[0].availability;
@@ -69,8 +70,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const starSpan = document.createElement('span');
         let rate;
-        if (parkingLots === null) {
-            if(parkingLots.rate !== null) {rate = parkingLots[0].rate;}
+        if (parkingLots[0] === null) {
+            if(parkingLots[0][rate] !== null) {rate = parkingLots[0][rate];}
             else if (googleRate !== null) {rate = googleRate;}
             else {rate = 0; starSpan.innerHTML += "None";}
         } else {
@@ -93,11 +94,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     var price;
     var parkingLotPrice;
     // if (typeof parkingLots === 'undefined') {
-        if (parkingLots === null) {
-
+    if (parkingLots[0] === null) {
         parkingLotPrice = "Price: None";
     } else {
-        price = parkingLots["price"];
+        price = parkingLots[0]["price"]
         parkingLotPrice = `Price: $${price}/hour`;
     }
      

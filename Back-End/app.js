@@ -50,7 +50,7 @@ client.connect()
     async function get_valid_Data(id) {
         
       try {
-        
+    
           // Query the parking_lot collection using the location (or _id) filter
           const data = await parking_lot.find({ location_id: id }).toArray();
           return data;
